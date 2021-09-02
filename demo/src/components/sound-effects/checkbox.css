@@ -1,0 +1,19 @@
+.checkbox__sound-wrapper {
+  font-size: 2rem;
+  height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
+.checkbox__sound-wrapper div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox__sound-wrapper input {
+  padding: 2rem;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
