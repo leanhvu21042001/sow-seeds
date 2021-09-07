@@ -1,0 +1,13 @@
+
+/* Tab content - About: */
+.about-section {
+  width: 100%;
+}
+
+.about-section .game-name {
+  font-weight: bold;
+  font-size: 25px;
+  color: tomato;
+  text-shadow: 1px 2px 1px #888;
+  margin-bottom: 10px;
+}

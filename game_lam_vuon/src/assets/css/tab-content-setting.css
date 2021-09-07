@@ -1,0 +1,110 @@
+/* Tab content - Settings: */
+.setting-section .bgmSetting-section {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.setting-section .bgmSetting-section .bgmSetting-title {
+  font-weight: bold;
+  padding: 5px 0;
+  text-decoration: underline;
+}
+
+.setting-section .bgmSetting-section .bgmSetting-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.setting-section .bgmSetting-section .bgmSetting-controls .bgmSetting-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+}
+
+.setting-section .bgmSetting-section .bgmSetting-controls .bgmSetting-btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  background-color: tomato;
+  margin-right: 5px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.setting-section .bgmSetting-section .bgmSetting-controls .bgmSetting-btn:last-child {
+  margin-right: 0;
+}
+
+.setting-section .bgmSetting-section .bgmSetting-controls .bgmSetting-slider {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.setting-section .bgmSetting-section .bgmSetting-controls .slider-name {
+  margin-right: 5px;
+  font-style: italic;
+}
+
+.setting-section .bgmSetting-section .bgmSetting-controls .bgmSetting-slider .volume-slider {
+  width: 100%;
+}
+
+.setting-section .soundSetting-section {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.setting-section .soundSetting-section .soundSetting-title {
+  font-weight: bold;
+  padding: 5px 0;
+  text-decoration: underline;
+}
+
+.setting-section .soundSetting-section .soundSetting-controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.setting-section .soundSetting-section .soundSetting-controls .soundSetting-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+}
+
+.setting-section .soundSetting-section .soundSetting-controls .soundSetting-btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  background-color: tomato;
+  margin-right: 5px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.setting-section .soundSetting-section .soundSetting-controls .soundSetting-slider {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.setting-section .soundSetting-section .soundSetting-controls .soundSetting-slider .slider-name {
+  margin-right: 5px;
+  font-style: italic;
+}
+
+.setting-section .soundSetting-section .soundSetting-controls .soundSetting-slider .volume-slider {
+  width: 100%;
+}

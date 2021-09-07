@@ -1,0 +1,69 @@
+.shop-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.shop-section .shop-section-wrap {
+  display: flex;
+  height: 80px;
+}
+
+.shop-section .shop-section-wrap * {
+  display: inline-block;
+}
+
+.shop-section .shop-section-wrap .toggle-shop {
+  font-size: 1.5rem;
+  border-radius: 10px 5px 10px 5px;
+  padding: 2px 8px;
+  color: rgb(241, 194, 241);
+  font-weight: bolder;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  background-color: rgba(46, 79, 46, 0.666);
+  outline: none;
+  border: 2px solid rgb(197, 188, 188);
+  width: 90px;
+  height: 40px;
+}
+
+.shop-section .shop-section-wrap .seeds-section {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-left: 20px;
+  transform: translateY(-200px);
+  transition: 1s;
+}
+
+.shop-section .shop-section-wrap .seeds-section.active {
+  transition: 1s;
+  transform: translateY(0);
+}
+
+.shop-section .shop-section-wrap .seeds-section .seed-product {
+  background-color: rgba(230, 216, 216, 0.279);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  justify-content: space-between;
+  margin-right: 10px;
+  padding: 12px;
+  border-radius:5px;
+}
+
+.shop-section .shop-section-wrap .seeds-section .seed-product .product-name {
+  font-weight: bolder;
+}
+
+.shop-section .shop-section-wrap .seeds-section .seed-product .product-image {
+  height: 60%;
+  width: 110%;
+}
+
+/* .shop-section .shop-section-wrap .seeds-section .seed-product .product-price {}
+
+.shop-section .shop-section-wrap .seeds-section .seed-product .product-price .price {}
+
+.shop-section .shop-section-wrap .seeds-section .seed-product .product-price .price-unit {} */

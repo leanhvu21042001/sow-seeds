@@ -1,0 +1,11 @@
+
+/* Plant: */
+.garden .garden-plots .plot .plant .plant-img {
+  height: 150%;
+  width: auto;
+  /* Position: */
+  position: absolute;
+  left: 50%;
+  bottom: 25%;
+  transform: translate(-50%, 0%) rotateX(30deg);
+}

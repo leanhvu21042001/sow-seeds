@@ -1,0 +1,95 @@
+/* MENU SECTION: */
+#menu-btn-input ~ .menu-section-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 90;
+}
+
+#menu-btn-input ~ .menu-section {
+  position: fixed;
+  top: 30vh;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 100;
+  transform: translateY(calc(100% - 44px));
+  transition: transform 0.3s ease;
+}
+
+.menu-section .menu-top {
+  position: relative;
+  display: flex;
+}
+
+.menu-section .menu-content {
+  width: 100%;
+  height: calc(100% - 44px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  overflow: auto;
+}
+
+.menu-btn {
+  position: relative;
+  display: block;
+  padding: 10px 80px;
+  background-color: #444;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #aaa;
+  text-decoration: none;
+  overflow: hidden;
+  border: 2px solid #444;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 0px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0px -5px 0px 0px #aaa, 0px -10px 0px 0px #eee;
+  transition: all 0.6s ease;
+}
+
+.menu-btn::before {
+  background-color: tomato;
+  content: "";
+  width: 100%;
+  height: 0%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  transition: all 0.6s ease;
+  z-index: -1;
+}
+
+.menu-btn:hover {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid tomato;
+  box-shadow: 1px -1px 5px 0px #eee;
+}
+
+.menu-btn:hover::before {
+  height: 500%;
+}
+
+#menu-btn-input {
+  display: none;
+}
+
+#menu-btn-input:checked ~ .menu-section {
+  transform: translateY(0);
+}
+
+#menu-btn-input:checked ~ .menu-section > .menu-content {
+  opacity: 1;
+}
+
+#menu-btn-input:checked ~ .menu-section-overlay {
+  display: block;
+}

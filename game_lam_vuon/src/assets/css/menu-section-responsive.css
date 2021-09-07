@@ -1,0 +1,23 @@
+/* RESPONSIVE DESIGN: */
+@media screen and (max-width: 576px) {
+  .menu-section .menu-content .tabs-section .tab-btn {
+      width: 100%;
+  }
+
+  .profile-section .left-section {
+      width: 100%;
+      padding-right: 0px;
+      border-right: none;
+      padding: 30px 0;
+      border-bottom: 1px solid #ccc;
+  }
+
+  .profile-section .right-section {
+      padding: 30px 0;
+      width: 100%;
+  }
+
+  .menu-section .menu-content .tabs-section .tab {
+      height: auto;
+  }
+}

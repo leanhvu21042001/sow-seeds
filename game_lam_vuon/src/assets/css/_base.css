@@ -1,0 +1,15 @@
+@import url('./fonts.css');
+
+*, *::before, *::after { padding: 0; margin: 0; box-sizing: border-box; font-family: 'Quicksand', sans-serif; }
+
+@import url('./game-section.css');
+@import url('./main-section.css');
+@import url('./plant.css');
+@import url('./seed.css');
+@import url('./menu-section.css');
+@import url('./tabs.css');
+@import url('./tab-content-profile.css');
+@import url('./tab-content-setting.css');
+@import url('./tab-content-about.css');
+@import url('./menu-section-responsive.css');
+@import url('./shop-section.css');
