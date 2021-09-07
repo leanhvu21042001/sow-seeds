@@ -77,3 +77,8 @@
   background-color: rgba(255, 99, 71, 0.8);
   animation-play-state: paused;
 }
+
+/* Hover to show countdown timer: */
+.garden .garden-plots .plot .plant:hover .countdown-timer.show-timer {
+  display: inline-block;
+}

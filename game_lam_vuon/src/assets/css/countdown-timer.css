@@ -1,0 +1,12 @@
+.garden .garden-plots .plot .plant .countdown-timer {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 10;
+    background-color: rgba(0,0,0,0.5);
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 2px;
+    display: none;
+}
