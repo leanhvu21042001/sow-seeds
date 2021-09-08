@@ -1,8 +1,13 @@
+import plants from "../services/plants.service";
+
 function App() {
+  
+  console.log(plants)
+
   return (
     <div className="app">
-      
-      <div className="game-section">
+      <img src={plants.original_plant} alt="" width="300" height="300"/>
+            <div className="game-section">
         <div className="main-section">
           <div className="garden">
             <div className="garden-plots">
