@@ -24,7 +24,30 @@ function Plant({ position, bag, removeLastItemFromBag }) {
         });
     }
 
-    const switchBetweenLv1AndLv2 = useCallback(() => {
+    const switchFromLv2ToLv1 = useCallback(() => {
+        // Lv2 -> Lv1:
+        setTimeout(() => {
+            if (seed.numberOfHarvestTime < 3) {
+                setSeed((prevState) => {
+                    let obj = { ...prevState };
+                    obj.beAbleToHarvest = false;
+                    obj.currentState = 'plant_lv1';
+                    return obj;
+                });
+            }
+            else {
+                setSeed((prevState) => {
+                    let obj = { ...prevState };
+                    obj.isDead = true;
+                    obj.beAbleToHarvest = false;
+                    obj.currentState = 'dead';
+                    return obj;
+                });
+            }
+        }, (seed.timeFromLv2ToLv1 * 1000));
+    }, [seed.numberOfHarvestTime, seed.timeFromLv2ToLv1]);
+
+    const switchFromLv1ToLv2 = useCallback(() => {
         // Lv1 -> Lv2:
         setTimeout(() => {
             setSeed((prevState) => {
@@ -34,31 +57,8 @@ function Plant({ position, bag, removeLastItemFromBag }) {
                 obj.currentState = 'plant_lv2';
                 return obj;
             });
-
-            // Lv2 -> Lv1:
-            setTimeout(() => {
-                if (seed.numberOfHarvestTime < 3) {
-                    setSeed((prevState) => {
-                        let obj = { ...prevState };
-                        obj.beAbleToHarvest = false;
-                        obj.currentState = 'plant_lv1';
-                        return obj;
-                    });
-                    switchBetweenLv1AndLv2();
-                }
-                else {
-                    setSeed((prevState) => {
-                        let obj = { ...prevState };
-                        obj.isDead = true;
-                        obj.beAbleToHarvest = false;
-                        obj.currentState = 'dead';
-                        return obj;
-                    });
-                }
-            }, (seed.timeFromLv2ToLv1 * 1000));
-
         }, (seed.timeFromLv1ToLv2 * 1000));
-    }, [seed]);
+    }, [seed.timeFromLv1ToLv2]);
 
     const setSeedGrowing = useCallback(() => {
         setTimeout(() => {
@@ -67,9 +67,9 @@ function Plant({ position, bag, removeLastItemFromBag }) {
                 obj.currentState = 'plant_lv1';
                 return obj;
             });
-            switchBetweenLv1AndLv2();
+            // switchBetweenLv1AndLv2();
         }, (seed.timeToGrowUp * 1000));
-    }, [seed, switchBetweenLv1AndLv2]);
+    }, [seed.timeToGrowUp]);
 
     useEffect(() => {
         console.log('This component is re-rendered!');
@@ -84,18 +84,20 @@ function Plant({ position, bag, removeLastItemFromBag }) {
             setImgClass(' plant-img');
             setImgSrc(plantImgs[seed.img_forPlant_lv1]);
             setplantBtnSrc(toolImgs.img_Spade);
+            switchFromLv1ToLv2();
         }
         else if (seed.currentState === 'plant_lv2') {
             setImgClass(' plant-img');
             setImgSrc(flowerImgs[seed.img_forPlant_lv2]);
             setplantBtnSrc(toolImgs.img_Spade);
+            switchFromLv2ToLv1();
         }
         else {
             setImgClass('');
             setImgSrc('');
             setplantBtnSrc(toolImgs.img_Seeding);
         }
-    }, [seed, setSeedGrowing]);
+    }, [seed, setSeedGrowing, switchFromLv1ToLv2, switchFromLv2ToLv1]);
 
     return (
         <div className="plant">

@@ -23,8 +23,8 @@ function App() {
       img_forPlant_lv1: 'img_Plant',
       img_forPlant_lv2: 'img_Eschscholzia',
       timeToGrowUp: 3,
-      timeFromLv1ToLv2: 2,
-      timeFromLv2ToLv1: 2
+      timeFromLv1ToLv2: 5,
+      timeFromLv2ToLv1: 5
     },
     {
       id: 1,
