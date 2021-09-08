@@ -8,8 +8,8 @@
 
 - làm vườn:
   + [ ] <b>(Linh)</b>:
-  - [ ] trồng
-  - [ ] Chuyển giữa cây xanh và có hoa
+  - [x] trồng
+  - [x] Chuyển giữa cây xanh và có hoa
   - [ ] tính countdown timer.
   -------
   + [ ] <b>(Vũ)</b>:
