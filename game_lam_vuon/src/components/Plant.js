@@ -1,10 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import flowerImgs from './../services/flower.service';
+import plantImgs from './../services/plant.service';
+import seedImgs from './../services/seed.service';
+import toolImgs from './../services/tool.service';
 
 function Plant({ position, bag, removeLastItemFromBag }) {
     const [seed, setSeed] = useState({});
     const [img_class, setImgClass] = useState('');
     const [img_src, setImgSrc] = useState('');
-    const [plantBtn_src, setplantBtnSrc] = useState('./images/Garden/Tools/seeding.png');
+    const [plantBtn_src, setplantBtnSrc] = useState(toolImgs.img_Seeding);
 
     const doSeeding = () => {
         setSeed(() => {
@@ -72,24 +76,24 @@ function Plant({ position, bag, removeLastItemFromBag }) {
         console.log(seed);
         if (seed.currentState === 'seed') {
             setImgClass(' seed-img');
-            setImgSrc(`./images/Garden/Seeds/${seed.img_forSeed}`);
-            setplantBtnSrc('./images/Garden/Tools/spade.png');
+            setImgSrc(seedImgs[seed.img_forSeed]);
+            setplantBtnSrc(toolImgs.img_Spade);
             setSeedGrowing();
         }
         else if (seed.currentState === 'plant_lv1') {
             setImgClass(' plant-img');
-            setImgSrc(`./images/Garden/Plants/${seed.img_forPlant_lv1}`);
-            setplantBtnSrc('./images/Garden/Tools/spade.png');
+            setImgSrc(plantImgs[seed.img_forPlant_lv1]);
+            setplantBtnSrc(toolImgs.img_Spade);
         }
         else if (seed.currentState === 'plant_lv2') {
             setImgClass(' plant-img');
-            setImgSrc(`./images/Garden/Flowers/${seed.img_forPlant_lv2}`);
-            setplantBtnSrc('./images/Garden/Tools/spade.png');
+            setImgSrc(flowerImgs[seed.img_forPlant_lv2]);
+            setplantBtnSrc(toolImgs.img_Spade);
         }
         else {
             setImgClass('');
             setImgSrc('');
-            setplantBtnSrc('./images/Garden/Tools/seeding.png');
+            setplantBtnSrc(toolImgs.img_Seeding);
         }
     }, [seed, setSeedGrowing]);
 
