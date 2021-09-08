@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import flowerImgs from './../services/flower.service';
 import plantImgs from './../services/plant.service';
 import seedImgs from './../services/seed.service';
@@ -9,6 +9,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant }) {
     const [img_class, setImgClass] = useState('');
     const [img_src, setImgSrc] = useState('');
     const [plantBtn_src, setplantBtnSrc] = useState(toolImgs.img_Seeding);
+    const count_harvesting = useRef(0);
 
     // Start to seed:
     const doSeeding = () => {
@@ -114,13 +115,9 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant }) {
     // Harvest:
     const doHarvesting = () => {
         if (seed.currentState === 'plant_lv2') {
-            if (seed.beAbleToHarvest === true) {
-                // harvestAndSellPlant(seed.price_of_plant);
-                setSeed((prevState) => {
-                    let obj = { ...prevState };
-                    obj.beAbleToHarvest = false;
-                    return obj;
-                });
+            if (seed.beAbleToHarvest === true && count_harvesting.current < seed.numberOfHarvestTime) {
+                count_harvesting.current = count_harvesting.current + 1;
+                harvestAndSellPlant(seed.price_of_plant);
                 alert("Đã thu hoạch!");
             }
             else {
