@@ -20,7 +20,7 @@
 - setting:
   - [ ] hiệu ứng người chơi <b>(Linh)</b>
 
-  - [ ] background âm thanh <b>(Vũ)</b>
+  - [x] background âm thanh <b>(Vũ)</b>
 
 - (mua hàng và cho vào túi:)
 
