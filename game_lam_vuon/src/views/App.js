@@ -141,7 +141,7 @@ function App() {
       
       <div className="user-section">
         <UserBar
-          name={"Ling"}
+          name={"username"}
           imageString={userImage}
           score={money}
           level={"0"}
