@@ -1,5 +1,6 @@
 
 function SettingSection() {
+    
     return (
         <div className="setting-section">
             <div className="bgmSetting-section">

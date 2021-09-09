@@ -1,31 +1,59 @@
-import React, { useState } from 'react'
-import useSound from 'use-sound';
-import './checkbox.css'
-import sounds from './sounds.wav';
-
+import React, { useEffect, useState } from 'react'
+import Vexento from './Vexento-Spark.mp3';
 function MainSound() {
-  const [play] = useSound(sounds, {
-    sprite: {
-      in: [500, 1000],
-      out: [1500, 2000],
+
+  const [bgSound] = useState(new Audio(Vexento));
+  const [isPlayOrPause, setIsPlayOrPause] = useState(false);
+  const [isStop, setIsStop] = useState(false);
+
+  useEffect(() => {
+    if (isPlayOrPause === true) {
+      bgSound.volume = 0.25;
+      bgSound.loop = true;
+      bgSound.play();
+      setIsStop(false);
+    } else {
+      bgSound.pause();
     }
-  });
-  const [isChecked, setIsChecked] = useState(false);
+  }, [isPlayOrPause]);
+
+  useEffect(() => {
+    if (isStop === true) {
+      bgSound.pause();
+      bgSound.currentTime = 0;
+      setIsPlayOrPause(false);
+    }
+  }, [isStop]);
+
+  const handleChangeVolume = (event) => {
+    bgSound.volume = event.target.value / 100;
+  }
   return (
     <div className="checkbox__sound-wrapper">
-      <div>
-        <label htmlFor="checkbox__sound"
-          style={{ cursor: 'pointer' }}>Click Me!</label>
-        <input
-          id="checkbox__sound"
-          type="checkbox"
-          value={isChecked}
-          onClick={() => {
-            setIsChecked(!isChecked);
-            play({ id: isChecked ? "in" : "out" });
-          }}
-        />
-      </div>
+      <button
+        type="button"
+        style={{ padding: "10px", fontSize: "1.5rem" }}
+        onClick={() => {
+          setIsPlayOrPause(!isPlayOrPause);
+        }}
+      >
+        {isPlayOrPause ? 'pause' : 'play'}
+      </button>
+      <button
+        type="button"
+        style={{ padding: "10px", fontSize: "1.5rem" }}
+        onClick={() => {
+          setIsStop(!isStop);
+        }}
+      >
+        Stop
+      </button>
+      <input
+        min={0}
+        max={100}
+        defaultValue={25}
+        onChange={(event) => { handleChangeVolume(event) }}
+        type="range" />
     </div>
   )
 }
