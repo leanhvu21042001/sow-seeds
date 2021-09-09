@@ -118,24 +118,21 @@ function App() {
       <div className="shop-section" style={{ position: 'fixed', top: 0, left: 0 }}>
         <div className="shop-section-wrap">
           <button onClick={() => (setIsMenuToggle(!isMenuToggle))} type="button" className="toggle-shop">Seeds</button>
-          <div className={`seeds-section${isMenuToggle ? " active": ""}`}>
+          <div className={`seeds-section${isMenuToggle ? " active" : ""}`}>
             {
-              seedProducts.map((object, i) => {
-
-                return <SeedItem
-                  key={i}
+              seedProducts.map((object, i) => (
+                <div className="seed-product"
                   title={object.name}
-                  price={object.price_of_seeds}
-                  imageString={object.img_forSeed}
-                  unit={" $ "}
-                />
-
-                // return <div className="seed-product"
-                //   key={i}
-                //   onClick={() => { return buySeedProduct(i); }}>
-                //   {object.name}
-                // </div>
-              })
+                  key={i}
+                  onClick={() => { return buySeedProduct(i); }}
+                >
+                  <SeedItem
+                    price={object.price_of_seeds}
+                    imageString={object.img_forSeed}
+                    unit={" $ "}
+                  />
+                </div>
+              ))
             }
           </div>
         </div>

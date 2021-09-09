@@ -5,12 +5,13 @@ export default function SeedItem(props) {
   const { title, imageString, price, unit } = props;
   console.log(props);
   return (
-    <div className="seed-product" title={title}>
+
+    <>
       <img className="product-image" src={seedImgs[imageString]} alt={title} />
       <div className="product-price">
         <span className="price">{price}</span>
         <span className="price-unit">{unit}</span>
       </div>
-    </div>
+    </>
   )
 }
