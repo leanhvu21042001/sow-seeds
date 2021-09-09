@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import MainSection from '../components/MainSection';
 import MenuSection from '../components/MenuSection';
+import SeedItem from '../components/SeedItem';
 
 function App() {
+
+  // state to check shop menu is active
+  const [isMenuToggle, setIsMenuToggle] = useState(false);
   // The seeds you've just bought:
   const [bag, setBag] = useState([]);
 
@@ -92,7 +96,7 @@ function App() {
 
   const removeLastItemFromBag = () => {
     setBag((prevState) => {
-      let newBag = [ ...prevState ];
+      let newBag = [...prevState];
       newBag.pop();
       return newBag;
     });
@@ -104,6 +108,7 @@ function App() {
     });
   }
 
+
   // Component:
   return (
     <div className="game-section">
@@ -111,12 +116,28 @@ function App() {
       <MenuSection></MenuSection>
 
       <div className="shop-section" style={{ position: 'fixed', top: 0, left: 0 }}>
-        <div className="seeds-section">
-          {
-            seedProducts.map((object, i) => {
-              return <div className="seed-product" key={i} onClick={() => { return buySeedProduct(i); }}>{object.name}</div>
-            })
-          }
+        <div className="shop-section-wrap">
+          <button onClick={() => (setIsMenuToggle(!isMenuToggle))} type="button" className="toggle-shop">Seeds</button>
+          <div className={`seeds-section${isMenuToggle ? " active": ""}`}>
+            {
+              seedProducts.map((object, i) => {
+
+                return <SeedItem
+                  key={i}
+                  title={object.name}
+                  price={object.price_of_seeds}
+                  imageString={object.img_forSeed}
+                  unit={" $ "}
+                />
+
+                // return <div className="seed-product"
+                //   key={i}
+                //   onClick={() => { return buySeedProduct(i); }}>
+                //   {object.name}
+                // </div>
+              })
+            }
+          </div>
         </div>
       </div>
 
