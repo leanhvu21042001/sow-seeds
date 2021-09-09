@@ -1,0 +1,30 @@
+.user-section {
+  position: fixed;
+  top: 0;
+  right: 0;
+  font-weight: 900;
+  font-size: 1.5vw;
+  margin-top: 5px;
+  margin-right: 5px;
+  text-align: center;
+}
+
+.user-section .user-avatar {
+  width: 9vw;
+  border-radius: 8px;
+}
+
+/* .user-section .user-score {}
+
+.user-section .user-level {} */
+
+@media screen and (max-width:992px) {
+  .user-section {
+    margin-top: 0px;
+    margin-right: 0px;
+    font-size: 2vw;
+  }
+  .user-section .user-avatar {
+    width: 12vw;
+  }
+}

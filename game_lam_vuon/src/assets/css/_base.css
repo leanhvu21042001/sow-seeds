@@ -6,10 +6,13 @@
 @import url('./main-section.css');
 @import url('./plant.css');
 @import url('./seed.css');
+@import url('./countdown-timer.css');
 @import url('./menu-section.css');
 @import url('./tabs.css');
 @import url('./tab-content-profile.css');
 @import url('./tab-content-setting.css');
 @import url('./tab-content-about.css');
 @import url('./menu-section-responsive.css');
+
 @import url('./shop-section.css');
+@import url('./user-section.css');
