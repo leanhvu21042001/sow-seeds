@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import MainSection from '../components/MainSection';
 import MenuSection from '../components/MenuSection';
 import SeedItem from '../components/SeedItem';
-
+import UserBar from '../components/UserBar';
+import userImage from './../services/user.service'
 function App() {
 
   // state to check shop menu is active
@@ -137,11 +138,21 @@ function App() {
           </div>
         </div>
       </div>
+      
+      <div className="user-section">
+        <UserBar
+          name={"Ling"}
+          imageString={userImage}
+          score={money}
+          level={"0"}
+        />
+      </div>
 
-      <div className="info-section" style={{ position: 'fixed', right: 0, top: 0 }}>
+      {/* <div className="info-section" style={{ position: 'fixed', right: 0, top: 0 }}>
         <div className="money">${money}</div>
         <div className="level">Level 0</div>
-      </div>
+      </div> */}
+
     </div>
   );
 }
