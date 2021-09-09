@@ -37,6 +37,9 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant }) {
     const switchFromLv2ToLv1 = useCallback(() => {
         setTimeout(() => {
             if (seed.numberOfHarvestTime < 3) {
+                if (count_harvesting.current < seed.numberOfHarvestTime) {
+                    count_harvesting.current = seed.numberOfHarvestTime;
+                }
                 setSeed((prevState) => {
                     let obj = { ...prevState };
                     obj.beAbleToHarvest = false;
@@ -45,6 +48,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant }) {
                 });
             }
             else {
+                count_harvesting.current = 0;
                 setSeed((prevState) => {
                     let obj = { ...prevState };
                     obj.isDead = true;
