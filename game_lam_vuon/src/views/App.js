@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import MainSection from '../components/MainSection';
 import MenuSection from '../components/MenuSection';
-
+import SeedItem from '../components/SeedItem';
+import UserBar from '../components/UserBar';
+import userImage from './../services/user.service'
 function App() {
+
+  // state to check shop menu is active
+  const [isMenuToggle, setIsMenuToggle] = useState(false);
   // The seeds you've just bought:
   const [bag, setBag] = useState([]);
 
@@ -92,7 +97,7 @@ function App() {
 
   const removeLastItemFromBag = () => {
     setBag((prevState) => {
-      let newBag = [ ...prevState ];
+      let newBag = [...prevState];
       newBag.pop();
       return newBag;
     });
@@ -104,6 +109,7 @@ function App() {
     });
   }
 
+
   // Component:
   return (
     <div className="game-section">
@@ -111,19 +117,42 @@ function App() {
       <MenuSection></MenuSection>
 
       <div className="shop-section" style={{ position: 'fixed', top: 0, left: 0 }}>
-        <div className="seeds-section">
-          {
-            seedProducts.map((object, i) => {
-              return <div className="seed-product" key={i} onClick={() => { return buySeedProduct(i); }}>{object.name}</div>
-            })
-          }
+        <div className="shop-section-wrap">
+          <button onClick={() => (setIsMenuToggle(!isMenuToggle))} type="button" className="toggle-shop">Seeds</button>
+          <div className={`seeds-section${isMenuToggle ? " active" : ""}`}>
+            {
+              seedProducts.map((object, i) => (
+                <div className="seed-product"
+                  title={object.name}
+                  key={i}
+                  onClick={() => { return buySeedProduct(i); }}
+                >
+                  <SeedItem
+                    price={object.price_of_seeds}
+                    imageString={object.img_forSeed}
+                    unit={" $ "}
+                  />
+                </div>
+              ))
+            }
+          </div>
         </div>
       </div>
+      
+      <div className="user-section">
+        <UserBar
+          name={"Ling"}
+          imageString={userImage}
+          score={money}
+          level={"0"}
+        />
+      </div>
 
-      <div className="info-section" style={{ position: 'fixed', right: 0, top: 0 }}>
+      {/* <div className="info-section" style={{ position: 'fixed', right: 0, top: 0 }}>
         <div className="money">${money}</div>
         <div className="level">Level 0</div>
-      </div>
+      </div> */}
+
     </div>
   );
 }
