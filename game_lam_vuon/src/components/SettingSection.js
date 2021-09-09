@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { backgroundMusics } from "./../services/sounds.service";
+
 function SettingSection() {
 
     const [bgSound] = useState(new Audio(backgroundMusics.Vexento));
     const [isPlayOrPause, setIsPlayOrPause] = useState(false);
     const [isStop, setIsStop] = useState(false);
+
+    // thay đổi isPlayOrPause từ sự kiện click, sẽ thay đổi play hoặc pause audio.
     useEffect(() => {
         if (isPlayOrPause === true) {
             bgSound.volume = 0.25;
@@ -16,6 +19,7 @@ function SettingSection() {
         }
     }, [isPlayOrPause]);
 
+    // chạy mỗi khi click stop
     useEffect(() => {
         if (isStop === true) {
             bgSound.pause();
@@ -24,6 +28,7 @@ function SettingSection() {
         }
     }, [isStop]);
 
+    // thay đổi volumn audio
     const handleChangeVolume = (event) => {
         bgSound.volume = event.target.value / 100;
     }
