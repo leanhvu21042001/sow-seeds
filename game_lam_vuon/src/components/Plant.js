@@ -3,6 +3,7 @@ import flowerImgs from './../services/flower.service';
 import plantImgs from './../services/plant.service';
 import seedImgs from './../services/seed.service';
 import toolImgs from './../services/tool.service';
+import CountdownTimer from './CountdownTimer';
 
 function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant }) {
     const [seed, setSeed] = useState({});
@@ -10,6 +11,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant }) {
     const [img_src, setImgSrc] = useState('');
     const [plantBtn_src, setplantBtnSrc] = useState(toolImgs.img_Seeding);
     const count_harvesting = useRef(0);
+    const countdown_timer = useRef(0);
 
     // Start to seed:
     const doSeeding = () => {
@@ -35,6 +37,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant }) {
 
     // Lv2 -> Lv1:
     const switchFromLv2ToLv1 = useCallback(() => {
+        countdown_timer.current = seed.timeFromLv2ToLv1;
         setTimeout(() => {
             if (seed.numberOfHarvestTime < 3) {
                 setSeed((prevState) => {
@@ -59,6 +62,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant }) {
 
     // Lv1 -> Lv2:
     const switchFromLv1ToLv2 = useCallback(() => {
+        countdown_timer.current = seed.timeFromLv1ToLv2;
         setTimeout(() => {
             setSeed((prevState) => {
                 let obj = { ...prevState };
@@ -73,6 +77,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant }) {
 
     // Up to level 1:
     const setSeedGrowing = useCallback(() => {
+        countdown_timer.current = seed.timeToGrowUp;
         setTimeout(() => {
             setSeed((prevState) => {
                 let obj = { ...prevState };
@@ -85,7 +90,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant }) {
 
     // Check seed and set states:
     useEffect(() => {
-        console.log( {1: seed.beAbleToHarvest, 2: seed.currentState} );
+        console.log({ 1: seed.beAbleToHarvest, 2: seed.currentState });
         if (seed.currentState === 'seed') {
             setImgClass(' seed-img');
             setImgSrc(seedImgs[seed.img_forSeed]);
@@ -146,7 +151,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant }) {
             <div className="plant-btn" onClick={() => { return onClick_PlantBtn(); }}>
                 <img className="plant-btn-img" src={plantBtn_src} alt="plant-btn-img"></img>
             </div>
-            <div className="countdown-timer">00:00</div>
+            <CountdownTimer countdown_timer={countdown_timer.current}></CountdownTimer>
         </div>
     );
 }
