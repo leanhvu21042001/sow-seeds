@@ -8,6 +8,7 @@ function App() {
 
   // state to check shop menu is active
   const [isMenuToggle, setIsMenuToggle] = useState(false);
+  
   // The seeds you've just bought:
   const [bag, setBag] = useState([]);
 
