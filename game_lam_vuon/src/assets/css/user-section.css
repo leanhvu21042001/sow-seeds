@@ -12,6 +12,7 @@
   width: 100px;
   /* border-radius: 0 0 50% 50%; */
   border-radius: 50% 0 50% 50%;
+  box-shadow: -5px -5px 1px #ddd;
 }
 
 .user-section .user-quick-info {
