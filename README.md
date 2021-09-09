@@ -18,13 +18,13 @@
   - [ ] 1 luốn 1 loại cây.
 
 - setting:
-  - hiệu ứng người chơi <b>(Linh)</b>
+  - [ ] hiệu ứng người chơi <b>(Linh)</b>
 
-  - background âm thanh <b>(Vũ)</b>
+  - [ ] background âm thanh <b>(Vũ)</b>
 
 - (mua hàng và cho vào túi:)
 
 
-- tính level: <b>(Linh, Vũ)</b>
+- [ ] tính level: <b>(Linh, Vũ)</b>
 
 - (đăng nhập: )
