@@ -16,7 +16,7 @@ function ProfileSection() {
                 </div>
                 <div className="user-money-wrapper">
                     <div className="user-money">
-                        <div className="money-text">$0</div>
+                        <div className="money-text">$ 0</div>
                     </div>
                 </div>
                 <a className="sign-out-btn" href="/">Sign out</a>

@@ -6,7 +6,7 @@ function CountdownTimer({ timer_value }) {
 
     // Start coundown-timer:
     useEffect(() => {
-        console.log(`CountdownTimer useEffect() is called! (timer_value = ${timer_value})`);
+        // console.log(`CountdownTimer useEffect() is called! (timer_value = ${timer_value})`);
 
         let intervalID;
         if (timer_value > 0) {

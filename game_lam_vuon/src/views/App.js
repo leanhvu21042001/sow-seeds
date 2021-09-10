@@ -8,9 +8,10 @@ import toolImgs from '../services/tool.service';
 
 function App() {
 
-  // state to check shop menu is active
+  // State to check if shop menu (seeds) is active:
   const [isMenuToggle, setIsMenuToggle] = useState(false);
-  // state to check shop menu is active
+
+  // State to check if shop menu (tools) is active:
   const [isMenuToggleTools, setIsMenuToggleTools] = useState(false);
 
   // The seeds you've just bought:
@@ -30,8 +31,8 @@ function App() {
       img_forPlant_lv1: 'img_Plant',
       img_forPlant_lv2: 'img_Eschscholzia',
       timeToGrowUp: 5,
-      timeFromLv1ToLv2: 20,
-      timeFromLv2ToLv1: 15
+      timeFromLv1ToLv2: 15,
+      timeFromLv2ToLv1: 10
     },
     {
       id: 1,
@@ -134,6 +135,7 @@ function App() {
   return (
     <div className="game-section">
       <MainSection bag={bag} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant}></MainSection>
+      
       <MenuSection></MenuSection>
 
       {/* Seeds: */}

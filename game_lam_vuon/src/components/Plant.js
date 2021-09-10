@@ -5,28 +5,37 @@ import seedImgs from './../services/seed.service';
 import toolImgs from './../services/tool.service';
 import CountdownTimer from './CountdownTimer';
 
-function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant }) {
+function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seedName, numerOfPlants, setPlantName, addOrRemovePlant }) {
     const [seed, setSeed] = useState({});
     const [img_class, setImgClass] = useState('');
     const [img_src, setImgSrc] = useState('');
     const [plantBtn_src, setplantBtnSrc] = useState(toolImgs.img_Seeding);
     const count_harvesting = useRef(0);
     const timer_value = useRef(0);
+    // const isImgChangedAfterHarvesting = useRef(false);
 
     // Start to seed:
     const doSeeding = () => {
         if (bag.length > 0) {
-            setSeed(() => {
-                let arr = [...bag];
-                let item = arr[arr.length - 1];
-                item.numberOfHarvestTime = 0;
-                item.beAbleToHarvest = false;
-                item.currentState = 'seed';
-                item.position = position;
-                item.isDead = false;
-                removeLastItemFromBag();
-                return item;
-            });
+            // Nếu chưa có cây nào trong luống hoặc có rồi và muốn trồng đúng loại thuộc luống đó, thì cho phép trồng:
+            if ((numerOfPlants === 0) || (seedName === bag[bag.length - 1].name)) {
+                setPlantName(bag[bag.length - 1].name);
+                addOrRemovePlant(1);
+                setSeed(() => {
+                    let arr = [...bag];
+                    let item = arr[arr.length - 1];
+                    item.numberOfHarvestTime = 0;
+                    item.beAbleToHarvest = false;
+                    item.currentState = 'seed';
+                    item.position = position;
+                    item.isDead = false;
+                    removeLastItemFromBag();
+                    return item;
+                });
+            }
+            else {
+                alert('LƯU Ý: Một luống đất chỉ được trồng một loại cây!');
+            }
         }
         else {
             alert("Bạn phải mua hạt giống để gieo hạt!");
@@ -60,8 +69,11 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant }) {
                     obj.currentState = 'dead';
                     return obj;
                 });
+                addOrRemovePlant(-1);
             }
         }, (seed.timeFromLv2ToLv1 * 1000));
+        
+        // eslint-disable-next-line
     }, [seed.numberOfHarvestTime, seed.timeFromLv2ToLv1]);
 
 
@@ -97,7 +109,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant }) {
 
     // Check seed and set states:
     useEffect(() => {
-        console.log( {1: seed.beAbleToHarvest, 2: seed.currentState} );
+        // console.log( {1: seed.beAbleToHarvest, 2: seed.currentState} );
         if (seed.currentState === 'seed') {
             setImgClass(' seed-img');
             setImgSrc(seedImgs[seed.img_forSeed]);
@@ -132,12 +144,14 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant }) {
 
 
     // Harvest:
-    const doHarvesting = () => {
+    const doHarvesting = useCallback(() => {
         if (seed.currentState === 'plant_lv2') {
             if (seed.beAbleToHarvest === true && count_harvesting.current < seed.numberOfHarvestTime) {
                 count_harvesting.current = count_harvesting.current + 1;
                 harvestAndSellPlant(seed.price_of_plant);
-                alert("Đã thu hoạch!");
+                alert(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant}.`);
+                // Change image after harvesting:
+                // setImgSrc(plantImgs[seed.img_forPlant_lv1]);
             }
             else {
                 alert("Bạn đã thu hoạch cây này rồi!");
@@ -146,7 +160,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant }) {
         else {
             alert("Phải chờ cây trưởng thành mới có thể thu hoạch!");
         }
-    };
+    }, [harvestAndSellPlant, seed]);
 
 
     // Click plant-btn:
