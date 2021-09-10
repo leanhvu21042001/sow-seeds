@@ -11,6 +11,7 @@ function SettingSection({ setIsMutePop, isMutePop, handleChangeInputRangeMusicPo
     // chạy khi bắt đầu hiện game
     useEffect(() => {
         bgSound.volume = 0.25;
+        bgSound.loop = true;
         bgSound.play();
     }, []);
 
