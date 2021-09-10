@@ -10,10 +10,10 @@
   + [ ] <b>(Linh)</b>:
   - [x] trồng
   - [x] Chuyển giữa cây xanh và có hoa
-  - [ ] tính countdown timer.
+  - [x] tính countdown timer.
   -------
   + [ ] <b>(Vũ)</b>:
-  - [ ] bán cây
+  - [x] bán cây
   - [ ] Loại bỏ cây.
   - [ ] 1 luốn 1 loại cây.
 
