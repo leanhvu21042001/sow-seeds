@@ -18,7 +18,7 @@
   - [ ] 1 luốn 1 loại cây.
 
 - setting:
-  - [ ] hiệu ứng người chơi <b>(Linh)</b>
+  - [x] hiệu ứng người chơi <b>(Linh)</b>
 
   - [x] background âm thanh <b>(Vũ)</b>
 

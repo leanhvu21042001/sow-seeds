@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { backgroundMusics } from "./../services/sounds.service";
 
-function SettingSection() {
+function SettingSection({ setIsMutePop , isMutePop, handleChangeInputRangeMusicPop}) {
 
     const [bgSound] = useState(new Audio(backgroundMusics.Vexento));
     const [isPlayOrPause, setIsPlayOrPause] = useState(false);
     const [isStop, setIsStop] = useState(false);
-
+    
     // thay đổi isPlayOrPause từ sự kiện click, sẽ thay đổi play hoặc pause audio.
     useEffect(() => {
         if (isPlayOrPause === true) {
@@ -32,7 +32,6 @@ function SettingSection() {
     const handleChangeVolume = (event) => {
         bgSound.volume = event.target.value / 100;
     }
-
     return (
         <div className="setting-section">
             <div className="bgmSetting-section">
@@ -74,11 +73,17 @@ function SettingSection() {
                 <div className="soundSetting-title">Sound:</div>
                 <div className="soundSetting-controls">
                     <div className="soundSetting-btns">
-                        <div className="soundSetting-btn" id="btn-MuteUnmute_sound">Mute</div>
+                        <div
+                            onClick={() => {setIsMutePop(!isMutePop)}}
+                            className="soundSetting-btn" id="btn-MuteUnmute_sound">
+                        {isMutePop ? "Unmute" : "Mute"}   
+                        </div>
                     </div>
                     <div className="soundSetting-slider">
                         <div className="slider-name">Volume:</div>
-                        <input type="range" name="soundVolume-input" id="soundVolume-input" className="volume-slider" min="0" max="100" defaultValue="100"></input>
+                        <input
+                            onChange={e => handleChangeInputRangeMusicPop(e)}
+                            type="range" name="soundVolume-input" id="soundVolume-input" className="volume-slider" min="0" max="100" defaultValue="100"></input>
                     </div>
                 </div>
             </div>
