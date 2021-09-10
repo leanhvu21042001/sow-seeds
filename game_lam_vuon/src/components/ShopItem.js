@@ -1,7 +1,7 @@
 import React from 'react'
 import seedImgs from '../services/seed.service';
 
-export default function ShopeItem(props) {
+export default function ShopItem(props) {
   const { title, imageString, price, unit } = props;
   return (
     <>

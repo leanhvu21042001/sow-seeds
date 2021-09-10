@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import MainSection from '../components/MainSection';
 import MenuSection from '../components/MenuSection';
-import ShopeItem from '../components/ShopeItem';
+import ShopItem from '../components/ShopItem';
 import UserBar from '../components/UserBar';
 import userImage from './../services/user.service'
 import toolImgs from '../services/tool.service';
@@ -146,8 +146,9 @@ function App() {
                   title={object.name}
                   key={i}
                   onClick={() => { return buySeedProduct(i); }}
+                  style={isMenuToggle ? {}: {display: "none"}}
                 >
-                  <ShopeItem
+                  <ShopItem
                     price={object.price_of_seeds}
                     imageString={object.img_forSeed}
                     unit={" $ "}
@@ -163,14 +164,16 @@ function App() {
       <div className="shop-section" style={{ position: 'fixed', top: 80, left: 0 }}>
         <div className="shop-section-wrap">
           <button onClick={() => (setIsMenuToggleTools(!isMenuToggleTools))} type="button" className="toggle-shop">Tools</button>
-          <div className={`seeds-section${isMenuToggleTools ? " active" : ""}`}>
+          <div className={`seeds-section${isMenuToggleTools ? " active" : ""}`} >
             {
               tools.map((object, i) => (
                 <div className="seed-product"
                   title={object.title}
                   key={i}
+                  style={isMenuToggleTools ? {}: {display: "none"}}
                 >
-                  <ShopeItem
+                  <ShopItem
+                    
                     price={object.price}
                     imageString={object.seeding}
                   />
