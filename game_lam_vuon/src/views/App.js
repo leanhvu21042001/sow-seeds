@@ -25,9 +25,9 @@ function App() {
       img_forSeed: 'img_Eschscholzia_Seeds',
       img_forPlant_lv1: 'img_Plant',
       img_forPlant_lv2: 'img_Eschscholzia',
-      timeToGrowUp: 3,
-      timeFromLv1ToLv2: 5,
-      timeFromLv2ToLv1: 5
+      timeToGrowUp: 5,
+      timeFromLv1ToLv2: 20,
+      timeFromLv2ToLv1: 15
     },
     {
       id: 1,
@@ -37,9 +37,9 @@ function App() {
       img_forSeed: 'img_MorningGlory_Seeds',
       img_forPlant_lv1: 'img_Plant',
       img_forPlant_lv2: 'img_MorningGlory',
-      timeToGrowUp: 3,
-      timeFromLv1ToLv2: 5,
-      timeFromLv2ToLv1: 5
+      timeToGrowUp: 15,
+      timeFromLv1ToLv2: 30,
+      timeFromLv2ToLv1: 25
     },
     {
       id: 2,
@@ -49,9 +49,9 @@ function App() {
       img_forSeed: 'img_Pansy_Seeds',
       img_forPlant_lv1: 'img_Plant',
       img_forPlant_lv2: 'img_Pansy',
-      timeToGrowUp: 3,
-      timeFromLv1ToLv2: 5,
-      timeFromLv2ToLv1: 5
+      timeToGrowUp: 30,
+      timeFromLv1ToLv2: 50,
+      timeFromLv2ToLv1: 15
     },
     {
       id: 3,
@@ -61,9 +61,9 @@ function App() {
       img_forSeed: 'img_Rose_Seeds',
       img_forPlant_lv1: 'img_Plant',
       img_forPlant_lv2: 'img_Rose',
-      timeToGrowUp: 3,
-      timeFromLv1ToLv2: 5,
-      timeFromLv2ToLv1: 5
+      timeToGrowUp: 60,
+      timeFromLv1ToLv2: 75,
+      timeFromLv2ToLv1: 30
     },
     {
       id: 4,
@@ -73,9 +73,9 @@ function App() {
       img_forSeed: 'img_Sunflower_Seeds',
       img_forPlant_lv1: 'img_Plant',
       img_forPlant_lv2: 'img_Sunflower',
-      timeToGrowUp: 5,
-      timeFromLv1ToLv2: 8,
-      timeFromLv2ToLv1: 10
+      timeToGrowUp: 75,
+      timeFromLv1ToLv2: 90,
+      timeFromLv2ToLv1: 60
     }]
   });
 
