@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import MainSection from '../components/MainSection';
 import MenuSection from '../components/MenuSection';
-import SeedItem from '../components/SeedItem';
+import ShopeItem from '../components/ShopeItem';
 import UserBar from '../components/UserBar';
 import userImage from './../services/user.service'
+import toolImgs from '../services/tool.service';
+
 function App() {
 
   // state to check shop menu is active
   const [isMenuToggle, setIsMenuToggle] = useState(false);
+  // state to check shop menu is active
+  const [isMenuToggleTools, setIsMenuToggleTools] = useState(false);
+
   // The seeds you've just bought:
   const [bag, setBag] = useState([]);
 
@@ -78,8 +83,23 @@ function App() {
     }]
   });
 
-
-
+  const [tools] = useState(() => [
+    {
+      title: 'Seeding',
+      seeding: toolImgs.img_Seeding,
+      price: 0
+    },
+    {
+      title: 'Spade',
+      seeding: toolImgs.img_Spade,
+      price: 0
+    },
+    {
+      title: 'Wicker Basket',
+      seeding: toolImgs.img_WickerBasket,
+      price: 0
+    },
+  ]);
   // Methods:
   const buySeedProduct = (i) => {
     if (money >= seedProducts[i].price_of_seeds) {
@@ -127,7 +147,7 @@ function App() {
                   key={i}
                   onClick={() => { return buySeedProduct(i); }}
                 >
-                  <SeedItem
+                  <ShopeItem
                     price={object.price_of_seeds}
                     imageString={object.img_forSeed}
                     unit={" $ "}
@@ -138,7 +158,30 @@ function App() {
           </div>
         </div>
       </div>
-      
+
+      {/*  tools */}
+      <div className="shop-section" style={{ position: 'fixed', top: 80, left: 0 }}>
+        <div className="shop-section-wrap">
+          <button onClick={() => (setIsMenuToggleTools(!isMenuToggleTools))} type="button" className="toggle-shop">Tools</button>
+          <div className={`seeds-section${isMenuToggleTools ? " active" : ""}`}>
+            {
+              tools.map((object, i) => (
+                <div className="seed-product"
+                  title={object.title}
+                  key={i}
+                >
+                  <ShopeItem
+                    price={object.price}
+                    imageString={object.seeding}
+                  />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+      {/* tools - end  */}
+
       <div className="user-section">
         <UserBar
           name={"username"}
@@ -147,11 +190,6 @@ function App() {
           level={"0"}
         />
       </div>
-
-      {/* <div className="info-section" style={{ position: 'fixed', right: 0, top: 0 }}>
-        <div className="money">${money}</div>
-        <div className="level">Level 0</div>
-      </div> */}
 
     </div>
   );
