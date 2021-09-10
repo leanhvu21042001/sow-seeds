@@ -7,8 +7,8 @@ export default function ShopItem(props) {
     <>
       <img className="product-image" src={seedImgs[imageString] ?? imageString} alt={title} />
       <div className="product-price">
-        <span className="price">{price ?? ""}</span>
         <span className="price-unit">{unit ?? ""}</span>
+        <span className="price">{price ?? ""}</span>
       </div>
     </>
   )

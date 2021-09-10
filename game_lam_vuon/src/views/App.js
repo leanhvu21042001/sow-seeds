@@ -136,6 +136,7 @@ function App() {
       <MainSection bag={bag} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant}></MainSection>
       <MenuSection></MenuSection>
 
+      {/* Seeds: */}
       <div className="shop-section" style={{ position: 'fixed', top: 0, left: 0 }}>
         <div className="shop-section-wrap">
           <button onClick={() => (setIsMenuToggle(!isMenuToggle))} type="button" className="toggle-shop">Seeds</button>
@@ -146,12 +147,12 @@ function App() {
                   title={object.name}
                   key={i}
                   onClick={() => { return buySeedProduct(i); }}
-                  style={isMenuToggle ? {}: {display: "none"}}
+                  style={isMenuToggle ? {} : { display: "none" }}
                 >
                   <ShopItem
                     price={object.price_of_seeds}
                     imageString={object.img_forSeed}
-                    unit={" $ "}
+                    unit={"$"}
                   />
                 </div>
               ))
@@ -160,7 +161,7 @@ function App() {
         </div>
       </div>
 
-      {/*  tools */}
+      {/* Tools: */}
       <div className="shop-section" style={{ position: 'fixed', top: 80, left: 0 }}>
         <div className="shop-section-wrap">
           <button onClick={() => (setIsMenuToggleTools(!isMenuToggleTools))} type="button" className="toggle-shop">Tools</button>
@@ -170,10 +171,9 @@ function App() {
                 <div className="seed-product"
                   title={object.title}
                   key={i}
-                  style={isMenuToggleTools ? {}: {display: "none"}}
+                  style={isMenuToggleTools ? {} : { display: "none" }}
                 >
                   <ShopItem
-                    
                     price={object.price}
                     imageString={object.seeding}
                   />

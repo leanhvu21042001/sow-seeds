@@ -7,6 +7,7 @@
 .shop-section .shop-section-wrap {
   display: flex;
   height: 80px;
+  padding: 0 0 5px 0;
 }
 
 .shop-section .shop-section-wrap * {
@@ -27,6 +28,7 @@
   border-radius: 0px 50% 50%;
   box-shadow: 5px 0px 1px 0px #ddd, 0px 5px 1px 0px yellowgreen;
   transition: all 0.3s ease;
+  width: 60px;
 }
 
 .shop-section .shop-section-wrap .toggle-shop:hover {
@@ -41,11 +43,10 @@
   margin-left: 10px;
   /* transform: translateY(-200px); */
   transform: translateX(-400px);
-  transition: 1s;
+  transition: all 0.5s ease;
 }
 
 .shop-section .shop-section-wrap .seeds-section.active {
-  transition: 1s;
   /* transform: translateY(0); */
   transform: translateX(0);
 }

@@ -17,7 +17,7 @@ function SettingSection({ setIsMutePop , isMutePop, handleChangeInputRangeMusicP
         } else {
             bgSound.pause();
         }
-    }, [isPlayOrPause]);
+    }, [isPlayOrPause, bgSound]);
 
     // chạy mỗi khi click stop
     useEffect(() => {
@@ -26,7 +26,7 @@ function SettingSection({ setIsMutePop , isMutePop, handleChangeInputRangeMusicP
             bgSound.currentTime = 0;
             setIsPlayOrPause(false);
         }
-    }, [isStop]);
+    }, [isStop, bgSound]);
 
     // thay đổi volumn audio
     const handleChangeVolume = (event) => {
