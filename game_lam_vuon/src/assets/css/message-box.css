@@ -1,0 +1,62 @@
+/* Message box: */
+#message-box-input {
+    display: none;
+}
+
+.message-box {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    opacity: 0;
+    transform: translateX(-50%) translateY(calc(-100% - 10px));
+    transition: all 0.3s ease;
+}
+
+.message-box .message-section {
+    width: 300px;
+    height: auto;
+    background-color: rgba(238, 238, 238, 0.8);
+    padding: 5px 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 0px #666;
+}
+
+.message-box .message-title {
+    font-weight: bold;
+    text-align: center;
+    padding: 0 0 5px 0;
+    border-bottom: 1px solid #ccc;
+    color: yellowgreen;
+    text-shadow: 0px 1px 0px #666;
+    letter-spacing: 2px;
+    font-size: 18px;
+}
+
+.message-box .message-content {
+    padding: 5px 0;
+}
+
+.message-box .message-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message-box .ok-btn {
+    padding: 3px;
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+}
+
+.message-box .ok-btn:hover {
+    text-shadow: 1px 1px 3px #666;
+}
+
+#message-box-input:checked ~ .message-box {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}

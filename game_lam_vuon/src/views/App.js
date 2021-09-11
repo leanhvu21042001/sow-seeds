@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import MainSection from '../components/MainSection';
 import MenuSection from '../components/MenuSection';
 import ShopItem from '../components/ShopItem';
@@ -7,6 +7,20 @@ import userImage from './../services/user.service'
 import toolImgs from '../services/tool.service';
 
 function App() {
+  
+  // Message box:
+  const [isMessageShown, setIsMessageShown] = useState(false);
+  const message = useRef('');
+
+  const hideOrShowMessageBox = useCallback(() => {
+    setIsMessageShown(!isMessageShown);
+  }, [isMessageShown]);
+
+  const showMessageBox = useCallback((msg) => {
+    hideOrShowMessageBox();
+    message.current = msg;
+  }, [hideOrShowMessageBox])
+
 
   // State to check if shop menu (seeds) is active:
   const [isMenuToggle, setIsMenuToggle] = useState(false);
@@ -101,6 +115,7 @@ function App() {
       price: 0
     },
   ]);
+
   // Methods:
   const buySeedProduct = (i) => {
     if (money >= seedProducts[i].price_of_seeds) {
@@ -112,7 +127,8 @@ function App() {
       });
     }
     else {
-      alert("Không đủ tiền!");
+      showMessageBox("Không đủ tiền!");
+      // alert("Không đủ tiền!");
     }
   }
 
@@ -134,8 +150,8 @@ function App() {
   // Component:
   return (
     <div className="game-section">
-      <MainSection bag={bag} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant}></MainSection>
-      
+      <MainSection bag={bag} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} showMessageBox={showMessageBox}></MainSection>
+
       <MenuSection></MenuSection>
 
       {/* Seeds: */}
@@ -194,6 +210,20 @@ function App() {
           score={money}
           level={"0"}
         />
+      </div>
+
+      <input id="message-box-input" type="checkbox" name="message-box-input"
+        checked={isMessageShown}
+        onChange={hideOrShowMessageBox}>
+      </input>
+      <div className="message-box">
+        <div className="message-section">
+          <div className="message-title">Thông báo</div>
+          <div className="message-content">{message.current}</div>
+          <div className="message-btns">
+            <label className="ok-btn" htmlFor="message-box-input">OK</label>
+          </div>
+        </div>
       </div>
 
     </div>
