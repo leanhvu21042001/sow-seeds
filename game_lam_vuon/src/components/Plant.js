@@ -5,7 +5,7 @@ import seedImgs from './../services/seed.service';
 import toolImgs from './../services/tool.service';
 import CountdownTimer from './CountdownTimer';
 
-function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seedName, numerOfPlants, setPlantName, addOrRemovePlant }) {
+function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seedName, numerOfPlants, setPlantName, addOrRemovePlant, showMessageBox }) {
     const [seed, setSeed] = useState({});
     const [img_class, setImgClass] = useState('');
     const [img_src, setImgSrc] = useState('');
@@ -34,11 +34,13 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seed
                 });
             }
             else {
-                alert('LƯU Ý: Một luống đất chỉ được trồng một loại cây!');
+                showMessageBox('LƯU Ý: Một luống đất chỉ được trồng một loại cây!');
+                // alert('LƯU Ý: Một luống đất chỉ được trồng một loại cây!');
             }
         }
         else {
-            alert("Bạn phải mua hạt giống để gieo hạt!");
+            showMessageBox('Bạn phải mua hạt giống để gieo hạt!');
+            // alert("Bạn phải mua hạt giống để gieo hạt!");
             return;
         }
     }
@@ -72,7 +74,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seed
                 addOrRemovePlant(-1);
             }
         }, (seed.timeFromLv2ToLv1 * 1000));
-        
+
         // eslint-disable-next-line
     }, [seed.numberOfHarvestTime, seed.timeFromLv2ToLv1]);
 
@@ -97,7 +99,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seed
     const setSeedGrowing = useCallback(() => {
         setTimeout(() => {
             timer_value.current = 0;
-            
+
             setSeed((prevState) => {
                 let obj = { ...prevState };
                 obj.currentState = 'plant_lv1';
@@ -149,16 +151,19 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seed
             if (seed.beAbleToHarvest === true && count_harvesting.current < seed.numberOfHarvestTime) {
                 count_harvesting.current = count_harvesting.current + 1;
                 harvestAndSellPlant(seed.price_of_plant);
-                alert(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant}.`);
+                showMessageBox(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant}.`);
+                // alert(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant}.`);
                 // Change image after harvesting:
                 // setImgSrc(plantImgs[seed.img_forPlant_lv1]);
             }
             else {
-                alert("Bạn đã thu hoạch cây này rồi!");
+                showMessageBox('Bạn đã thu hoạch cây này rồi!');
+                // alert("Bạn đã thu hoạch cây này rồi!");
             }
         }
         else {
-            alert("Phải chờ cây trưởng thành mới có thể thu hoạch!");
+            showMessageBox('Phải chờ cây trưởng thành mới có thể thu hoạch!');
+            // alert("Phải chờ cây trưởng thành mới có thể thu hoạch!");
         }
     }, [harvestAndSellPlant, seed]);
 
