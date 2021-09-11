@@ -4,12 +4,12 @@ import TabsSection from './TabsSection';
 
 function MenuSection() {
     // 1.1. Background music:
-    const [bgMusic] = useState(new Audio(backgroundMusic.Vexento_Spark));
+    const [bgMusic] = useState(new Audio(backgroundMusic.ThePianoGuys_RachelPlatten_ThisIsYourFightSong));
 
     // 1.2. Background music - Check if bgMusic is played/paused or stopped:
     const bgmIsNeverPlayed = useRef(true);
     const [isPausedBGM, setIsPausedBGM] = useState(true);
-    const [bgmVolume, setBgmVolume] = useState(0.25);
+    const [bgmVolume, setBgmVolume] = useState(0.3);
 
     // 1.3. Background music - Handle events:
     const onClick_MenuOverlay = () => {

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import MainSection from '../components/MainSection';
 import MenuSection from '../components/MenuSection';
 import ShopItem from '../components/ShopItem';
@@ -7,18 +7,20 @@ import userImage from './../services/user.service'
 import toolImgs from '../services/tool.service';
 
 function App() {
+  
   // Message box:
   const [isMessageShown, setIsMessageShown] = useState(false);
   const message = useRef('');
 
-  const showMessageBox = (msg) => {
+  const hideOrShowMessageBox = useCallback(() => {
+    setIsMessageShown(!isMessageShown);
+  }, [isMessageShown]);
+
+  const showMessageBox = useCallback((msg) => {
     hideOrShowMessageBox();
     message.current = msg;
-  }
+  }, [hideOrShowMessageBox])
 
-  const hideOrShowMessageBox = () => {
-    setIsMessageShown(!isMessageShown);
-  }
 
   // State to check if shop menu (seeds) is active:
   const [isMenuToggle, setIsMenuToggle] = useState(false);

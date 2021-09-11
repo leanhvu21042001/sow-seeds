@@ -165,7 +165,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seed
             showMessageBox('Phải chờ cây trưởng thành mới có thể thu hoạch!');
             // alert("Phải chờ cây trưởng thành mới có thể thu hoạch!");
         }
-    }, [harvestAndSellPlant, seed]);
+    }, [harvestAndSellPlant, seed, showMessageBox]);
 
 
     // Click plant-btn:
