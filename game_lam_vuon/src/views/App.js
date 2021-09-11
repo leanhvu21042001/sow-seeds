@@ -113,6 +113,7 @@ function App() {
       price: 0
     },
   ]);
+
   // Methods:
   const buySeedProduct = (i) => {
     if (money >= seedProducts[i].price_of_seeds) {
@@ -124,7 +125,8 @@ function App() {
       });
     }
     else {
-      alert("Không đủ tiền!");
+      showMessageBox("Không đủ tiền!");
+      // alert("Không đủ tiền!");
     }
   }
 
