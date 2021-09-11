@@ -15,7 +15,7 @@
   + [ ] <b>(Vũ)</b>:
   - [x] bán cây
   - [ ] Loại bỏ cây.
-  - [ ] 1 luốn 1 loại cây.
+  - [x] 1 luốn 1 loại cây.
 
 - setting:
   - [x] hiệu ứng người chơi <b>(Linh)</b>
