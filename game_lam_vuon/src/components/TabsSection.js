@@ -2,7 +2,9 @@ import ProfileSection from './ProfileSection';
 import SettingSection from './SettingSection';
 import AboutSection from './AboutSection';
 
-function TabsSection({ setIsMutePop, isMutePop, handleChangeInputRangeMusicPop }) {
+function TabsSection({ isMutedAudio, setIsMutedAudio, onChange_SoundSlider,
+    isPausedBGM, bgmVolume, setIsPausedBGM, stopBGM, setBgmVolume }) {
+
     return (
         <div className="tabs-section">
             <input id="tab-1" className="tab-input" type="radio" name="tab-btn-input" defaultChecked></input>
@@ -18,9 +20,15 @@ function TabsSection({ setIsMutePop, isMutePop, handleChangeInputRangeMusicPop }
             <div className="tab">
                 <div className="tab-content">
                     <SettingSection
-                         handleChangeInputRangeMusicPop={handleChangeInputRangeMusicPop}
-                        setIsMutePop={setIsMutePop}
-                        isMutePop={isMutePop}></SettingSection>
+                        isMutedAudio={isMutedAudio}
+                        setIsMutedAudio={setIsMutedAudio}
+                        onChange_SoundSlider={onChange_SoundSlider}
+                        isPausedBGM={isPausedBGM}
+                        bgmVolume={bgmVolume}
+                        setIsPausedBGM={setIsPausedBGM}
+                        stopBGM={stopBGM}
+                        setBgmVolume={setBgmVolume}
+                    ></SettingSection>
                 </div>
             </div>
 

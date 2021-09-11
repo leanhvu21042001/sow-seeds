@@ -1,47 +1,7 @@
-import { useEffect, useState } from "react";
-import { backgroundMusics } from "./../services/sounds.service";
+import React from "react";
 
-function SettingSection({ setIsMutePop, isMutePop, handleChangeInputRangeMusicPop }) {
-
-    const [bgSound] = useState(new Audio(backgroundMusics.Vexento));
-    const [isPause, setIsPause] = useState(false);
-    const [isStop, setIsStop] = useState(false);
-    const [volume, setVolume] = useState(0.25);
-
-    // chạy khi bắt đầu hiện game
-    useEffect(() => {
-        bgSound.volume = 0.25;
-        bgSound.loop = true;
-        bgSound.play();
-    }, []);
-
-    // thay đổi volumn audio
-    useEffect(() => {
-        bgSound.volume = volume;
-    }, [volume]);
-
-
-    // thay đổi isPlayOrPause từ sự kiện click, sẽ thay đổi play hoặc pause audio.
-    useEffect(() => {
-        if (isPause === true) {
-            bgSound.pause();
-        } else {
-            if (volume === 0) {
-                bgSound.volume = 0;
-                bgSound.currentTime = bgSound.currentTime - 1;
-            }
-            bgSound.play();
-        }
-    }, [isPause]);
-
-    // dừng âm thannh khi isStop là true
-    useEffect(() => {
-        if (isStop === true) {
-            bgSound.pause();
-            bgSound.currentTime = 0;
-            setIsPause(true);
-        }
-    }, [isStop]);
+function SettingSection({ isMutedAudio, setIsMutedAudio, onChange_SoundSlider,
+    isPausedBGM, bgmVolume, setIsPausedBGM, stopBGM, setBgmVolume }) {
 
     return (
         <div className="setting-section">
@@ -52,15 +12,15 @@ function SettingSection({ setIsMutePop, isMutePop, handleChangeInputRangeMusicPo
                         <div
                             role="button"
                             onClick={() => {
-                                setIsPause(!isPause);
+                                return setIsPausedBGM(!isPausedBGM);
                             }}
                             className="bgmSetting-btn" id="btn-PlayPause_bgMusic">
-                            {isPause ? 'Play' : 'Pause'}
+                            {isPausedBGM ? 'Play' : 'Pause'}
                         </div>
                         <div
                             role="button"
                             onClick={() => {
-                                setIsStop(!isStop);
+                                return stopBGM();
                             }}
                             className="bgmSetting-btn"
                             id="btn-Stop_bgMusic">
@@ -74,8 +34,10 @@ function SettingSection({ setIsMutePop, isMutePop, handleChangeInputRangeMusicPo
                             name="bgMusicVolume-input" id="bgMusicVolume-input" className="volume-slider"
                             min={0}
                             max={100}
-                            defaultValue={25}
-                            onChange={({ target }) => { setVolume(target.value / 100) }}
+                            defaultValue={`${bgmVolume * 100}`}
+                            onChange={({ target }) => {
+                                return setBgmVolume(target.value / 100);
+                            }}
                             type="range" />
                     </div>
                 </div>
@@ -85,15 +47,17 @@ function SettingSection({ setIsMutePop, isMutePop, handleChangeInputRangeMusicPo
                 <div className="soundSetting-controls">
                     <div className="soundSetting-btns">
                         <div
-                            onClick={() => { setIsMutePop(!isMutePop) }}
+                            onClick={() => {
+                                return setIsMutedAudio(!isMutedAudio);
+                            }}
                             className="soundSetting-btn" id="btn-MuteUnmute_sound">
-                            {isMutePop ? "Unmute" : "Mute"}
+                            {isMutedAudio ? "Unmute" : "Mute"}
                         </div>
                     </div>
                     <div className="soundSetting-slider">
                         <div className="slider-name">Volume:</div>
                         <input
-                            onChange={e => handleChangeInputRangeMusicPop(e)}
+                            onChange={e => onChange_SoundSlider(e)}
                             type="range" name="soundVolume-input" id="soundVolume-input" className="volume-slider" min="0" max="100" defaultValue="100"></input>
                     </div>
                 </div>
