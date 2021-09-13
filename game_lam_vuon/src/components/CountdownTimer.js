@@ -44,7 +44,9 @@ function CountdownTimer({ timer_value }) {
         else {
             classRef.current = '';
         }
-        // return () => {clearInterval(intervalID);}; // This instruction is unnecessary.
+        return () => {
+            clearInterval(intervalID);
+        };
     }, [timer_value]);
 
     return (

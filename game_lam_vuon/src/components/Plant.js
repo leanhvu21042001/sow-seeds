@@ -12,6 +12,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seed
     const [plantBtn_src, setplantBtnSrc] = useState(toolImgs.img_Seeding);
     const count_harvesting = useRef(0);
     const timer_value = useRef(0);
+    const timeoutID = useRef(0);
     // const isImgChangedAfterHarvesting = useRef(false);
 
     // Start to seed:
@@ -48,7 +49,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seed
 
     // Lv2 -> Lv1:
     const switchFromLv2ToLv1 = useCallback(() => {
-        setTimeout(() => {
+        timeoutID.current = setTimeout(() => {
             timer_value.current = 0;
 
             if (seed.numberOfHarvestTime < 3) {
@@ -81,7 +82,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seed
 
     // Lv1 -> Lv2:
     const switchFromLv1ToLv2 = useCallback(() => {
-        setTimeout(() => {
+        timeoutID.current = setTimeout(() => {
             timer_value.current = 0;
 
             setSeed((prevState) => {
@@ -97,7 +98,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seed
 
     // Up to level 1:
     const setSeedGrowing = useCallback(() => {
-        setTimeout(() => {
+        timeoutID.current = setTimeout(() => {
             timer_value.current = 0;
 
             setSeed((prevState) => {
@@ -152,9 +153,29 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seed
                 count_harvesting.current = count_harvesting.current + 1;
                 harvestAndSellPlant(seed.price_of_plant);
                 showMessageBox(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant}.`);
-                // alert(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant}.`);
+                
                 // Change image after harvesting:
                 // setImgSrc(plantImgs[seed.img_forPlant_lv1]);
+                clearTimeout(timeoutID.current);
+                if (seed.numberOfHarvestTime < 3) {
+                    setSeed((prevState) => {
+                        let obj = { ...prevState };
+                        obj.beAbleToHarvest = false;
+                        obj.currentState = 'plant_lv1';
+                        return obj;
+                    });
+                }
+                else {
+                    count_harvesting.current = 0;
+                    setSeed((prevState) => {
+                        let obj = { ...prevState };
+                        obj.isDead = true;
+                        obj.beAbleToHarvest = false;
+                        obj.currentState = 'dead';
+                        return obj;
+                    });
+                    addOrRemovePlant(-1);
+                }
             }
             else {
                 showMessageBox('Bạn đã thu hoạch cây này rồi!');
@@ -165,7 +186,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seed
             showMessageBox('Phải chờ cây trưởng thành mới có thể thu hoạch!');
             // alert("Phải chờ cây trưởng thành mới có thể thu hoạch!");
         }
-    }, [harvestAndSellPlant, seed, showMessageBox]);
+    }, [harvestAndSellPlant, seed, showMessageBox, addOrRemovePlant]);
 
 
     // Click plant-btn:
@@ -180,6 +201,7 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seed
 
     return (
         <div className="plant">
+            {/* {console.log( {1: seed.beAbleToHarvest, 2: seed.currentState, 3: timer_value.current})} */}
             <img className={"seed-or-plant" + img_class} src={img_src} alt=""></img>
             <div className="plant-btn" onClick={() => { return onClick_PlantBtn(); }}>
                 <img className="plant-btn-img" src={plantBtn_src} alt="plant-btn-img"></img>
