@@ -5,7 +5,7 @@ import seedImgs from './../services/seed.service';
 import toolImgs from './../services/tool.service';
 import CountdownTimer from './CountdownTimer';
 
-function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seedName, numerOfPlants, setPlantName, addOrRemovePlant, showMessageBox }) {
+function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSellPlant, seedName, numerOfPlants, setPlantName, addOrRemovePlant, showMessageBox }) {
     const [seed, setSeed] = useState({});
     const [img_class, setImgClass] = useState('');
     const [img_src, setImgSrc] = useState('');
@@ -13,7 +13,6 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seed
     const count_harvesting = useRef(0);
     const timer_value = useRef(0);
     const timeoutID = useRef(0);
-    // const isImgChangedAfterHarvesting = useRef(false);
 
     // Start to seed:
     const doSeeding = () => {
@@ -190,7 +189,8 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seed
 
 
     // Click plant-btn:
-    const onClick_PlantBtn = () => {
+    const onClick_PlantBtn = (e) => {
+        e.stopPropagation();
         if (img_class === '') {
             return doSeeding();
         }
@@ -199,11 +199,33 @@ function Plant({ position, bag, removeLastItemFromBag, harvestAndSellPlant, seed
         }
     };
 
+    // Click on the ground:
+    const onClick_ground = (e) => {
+        e.stopPropagation();
+        if (toolsInUse.length > 0) {
+            for (let i = 0; i < toolsInUse.length; i++) {
+                if (toolsInUse[i].title === 'Spade') {
+                    clearTimeout(timeoutID.current);
+                    timer_value.current = 0;
+                    count_harvesting.current = 0;
+                    setSeed((prevState) => {
+                        let obj = { ...prevState };
+                        obj.isDead = true;
+                        obj.beAbleToHarvest = false;
+                        obj.currentState = 'dead';
+                        return obj;
+                    });
+                    addOrRemovePlant(-1);
+                }
+            }
+        }
+    }
+
     return (
-        <div className="plant">
+        <div className="plant" onClick={(e) => { return onClick_ground(e); }}>
             {/* {console.log( {1: seed.beAbleToHarvest, 2: seed.currentState, 3: timer_value.current})} */}
             <img className={"seed-or-plant" + img_class} src={img_src} alt=""></img>
-            <div className="plant-btn" onClick={() => { return onClick_PlantBtn(); }}>
+            <div className="plant-btn" onClick={(e) => { return onClick_PlantBtn(e); }}>
                 <img className="plant-btn-img" src={plantBtn_src} alt="plant-btn-img"></img>
             </div>
             <CountdownTimer timer_value={timer_value.current}></CountdownTimer>

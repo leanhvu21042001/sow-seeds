@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Plant from './Plant';
 
-function Plot({ position, bag, removeLastItemFromBag, harvestAndSellPlant, showMessageBox }) {
+function Plot({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSellPlant, showMessageBox }) {
     // Choose which type of seed to plant:
     const [seedName, setSeedName] = useState('');
 
@@ -25,12 +25,12 @@ function Plot({ position, bag, removeLastItemFromBag, harvestAndSellPlant, showM
 
     return (
         <div className="plot">
-            <Plant position={(position * 6) + 0} bag={bag} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} seedName={seedName} numerOfPlants={numerOfPlants} setPlantName={setPlantName} addOrRemovePlant={addOrRemovePlant} showMessageBox={showMessageBox}></Plant>
-            <Plant position={(position * 6) + 1} bag={bag} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} seedName={seedName} numerOfPlants={numerOfPlants} setPlantName={setPlantName} addOrRemovePlant={addOrRemovePlant} showMessageBox={showMessageBox}></Plant>
-            <Plant position={(position * 6) + 2} bag={bag} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} seedName={seedName} numerOfPlants={numerOfPlants} setPlantName={setPlantName} addOrRemovePlant={addOrRemovePlant} showMessageBox={showMessageBox}></Plant>
-            <Plant position={(position * 6) + 3} bag={bag} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} seedName={seedName} numerOfPlants={numerOfPlants} setPlantName={setPlantName} addOrRemovePlant={addOrRemovePlant} showMessageBox={showMessageBox}></Plant>
-            <Plant position={(position * 6) + 4} bag={bag} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} seedName={seedName} numerOfPlants={numerOfPlants} setPlantName={setPlantName} addOrRemovePlant={addOrRemovePlant} showMessageBox={showMessageBox}></Plant>
-            <Plant position={(position * 6) + 5} bag={bag} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} seedName={seedName} numerOfPlants={numerOfPlants} setPlantName={setPlantName} addOrRemovePlant={addOrRemovePlant} showMessageBox={showMessageBox}></Plant>
+            <Plant position={(position * 6) + 0} bag={bag} toolsInUse={toolsInUse} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} seedName={seedName} numerOfPlants={numerOfPlants} setPlantName={setPlantName} addOrRemovePlant={addOrRemovePlant} showMessageBox={showMessageBox}></Plant>
+            <Plant position={(position * 6) + 1} bag={bag} toolsInUse={toolsInUse} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} seedName={seedName} numerOfPlants={numerOfPlants} setPlantName={setPlantName} addOrRemovePlant={addOrRemovePlant} showMessageBox={showMessageBox}></Plant>
+            <Plant position={(position * 6) + 2} bag={bag} toolsInUse={toolsInUse} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} seedName={seedName} numerOfPlants={numerOfPlants} setPlantName={setPlantName} addOrRemovePlant={addOrRemovePlant} showMessageBox={showMessageBox}></Plant>
+            <Plant position={(position * 6) + 3} bag={bag} toolsInUse={toolsInUse} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} seedName={seedName} numerOfPlants={numerOfPlants} setPlantName={setPlantName} addOrRemovePlant={addOrRemovePlant} showMessageBox={showMessageBox}></Plant>
+            <Plant position={(position * 6) + 4} bag={bag} toolsInUse={toolsInUse} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} seedName={seedName} numerOfPlants={numerOfPlants} setPlantName={setPlantName} addOrRemovePlant={addOrRemovePlant} showMessageBox={showMessageBox}></Plant>
+            <Plant position={(position * 6) + 5} bag={bag} toolsInUse={toolsInUse} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} seedName={seedName} numerOfPlants={numerOfPlants} setPlantName={setPlantName} addOrRemovePlant={addOrRemovePlant} showMessageBox={showMessageBox}></Plant>
         </div>
     );
 }

@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import MainSection from '../components/MainSection';
 import MenuSection from '../components/MenuSection';
 import ShopItem from '../components/ShopItem';
+import ToolItem from '../components/ToolItem';
 import UserBar from '../components/UserBar';
 import userImage from './../services/user.service'
 import toolImgs from '../services/tool.service';
@@ -19,7 +20,7 @@ function App() {
   const showMessageBox = useCallback((msg) => {
     hideOrShowMessageBox();
     message.current = msg;
-  }, [hideOrShowMessageBox])
+  }, [hideOrShowMessageBox]);
 
 
   // State to check if shop menu (seeds) is active:
@@ -33,6 +34,9 @@ function App() {
 
   // Your money:
   const [money, setMoney] = useState(100);
+
+  // Your tools in use:
+  const [toolsInUse, setToolsInUse] = useState([]);
 
   // Seed products in shop:
   const [seedProducts] = useState(() => {
@@ -100,20 +104,15 @@ function App() {
 
   const [tools] = useState(() => [
     {
-      title: 'Seeding',
-      seeding: toolImgs.img_Seeding,
-      price: 0
-    },
-    {
       title: 'Spade',
-      seeding: toolImgs.img_Spade,
+      toolImg: toolImgs.img_Spade,
       price: 0
     },
     {
-      title: 'Wicker Basket',
-      seeding: toolImgs.img_WickerBasket,
+      title: 'Butterfly Net',
+      toolImg: toolImgs.img_ButterflyNet,
       price: 0
-    },
+    }
   ]);
 
   // Methods:
@@ -132,6 +131,22 @@ function App() {
     }
   }
 
+  const addToolToUse = (indexOfTool) => {
+    let count = 0;
+    for (let i = 0; i < toolsInUse.length; i++) {
+      if (toolsInUse[i].title === tools[indexOfTool].title) {
+        count++;
+        break;
+      }
+    }
+    if (count === 0) {
+      let newItem = { ...tools[indexOfTool] };
+      setToolsInUse((prevState) => {
+        return [...prevState, newItem];
+      });
+    }
+  }
+
   const removeLastItemFromBag = () => {
     setBag((prevState) => {
       let newBag = [...prevState];
@@ -147,10 +162,12 @@ function App() {
   }
 
 
+
+
   // Component:
   return (
     <div className="game-section">
-      <MainSection bag={bag} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} showMessageBox={showMessageBox}></MainSection>
+      <MainSection bag={bag} toolsInUse={toolsInUse} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} showMessageBox={showMessageBox}></MainSection>
 
       <MenuSection></MenuSection>
 
@@ -189,11 +206,12 @@ function App() {
                 <div className="seed-product"
                   title={object.title}
                   key={i}
+                  onClick={() => { return addToolToUse(i); }}
                   style={isMenuToggleTools ? {} : { display: "none" }}
                 >
-                  <ShopItem
+                  <ToolItem
                     price={object.price}
-                    imageString={object.seeding}
+                    image={object.toolImg}
                   />
                 </div>
               ))
@@ -201,7 +219,6 @@ function App() {
           </div>
         </div>
       </div>
-      {/* tools - end  */}
 
       <div className="user-section">
         <UserBar
