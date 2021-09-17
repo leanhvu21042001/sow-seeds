@@ -8,7 +8,9 @@ import userImage from './../services/user.service'
 import toolImgs from '../services/tool.service';
 
 function App() {
-  
+  const [isSpadeActive, setIsSpadeActive] = useState(false);
+  const [isBNetActive, setIsBNetActive] = useState(false);
+
   // Message box:
   const [isMessageShown, setIsMessageShown] = useState(false);
   const message = useRef('');
@@ -102,15 +104,17 @@ function App() {
     }]
   });
 
-  const [tools] = useState(() => [
+  const [tools, setTools] = useState(() => [
     {
       title: 'Spade',
       toolImg: toolImgs.img_Spade,
+      quantity: 0,
       price: 0
     },
     {
       title: 'Butterfly Net',
       toolImg: toolImgs.img_ButterflyNet,
+      quantity: 0,
       price: 0
     }
   ]);
@@ -127,23 +131,54 @@ function App() {
     }
     else {
       showMessageBox("Không đủ tiền!");
-      // alert("Không đủ tiền!");
     }
   }
 
   const addToolToUse = (indexOfTool) => {
     let count = 0;
+    let indexOfToolInUse = -1;
     for (let i = 0; i < toolsInUse.length; i++) {
       if (toolsInUse[i].title === tools[indexOfTool].title) {
         count++;
+        indexOfToolInUse = i;
         break;
       }
     }
     if (count === 0) {
-      let newItem = { ...tools[indexOfTool] };
       setToolsInUse((prevState) => {
+        let newItem = { ...tools[indexOfTool] };
         return [...prevState, newItem];
       });
+      setTools((prevState) => {
+        prevState[indexOfTool].quantity = 1;
+        return prevState;
+      });
+      // Active btn:
+      if (tools[indexOfTool].title === 'Spade') {
+        setIsSpadeActive(true);
+      }
+      else {
+        setIsBNetActive(true);
+      }
+    }
+    else {
+      setToolsInUse((prevState) => {
+        if (indexOfToolInUse >= 0 && indexOfToolInUse < toolsInUse.length) {
+          prevState.splice(indexOfToolInUse, 1);
+        }
+        return prevState;
+      });
+      setTools((prevState) => {
+        prevState[indexOfTool].quantity = 0;
+        return prevState;
+      });
+      // Active btn:
+      if (tools[indexOfTool].title === 'Spade') {
+        setIsSpadeActive(false);
+      }
+      else {
+        setIsBNetActive(false);
+      }
     }
   }
 
@@ -201,21 +236,30 @@ function App() {
         <div className="shop-section-wrap">
           <button onClick={() => (setIsMenuToggleTools(!isMenuToggleTools))} type="button" className="toggle-shop">Tools</button>
           <div className={`seeds-section${isMenuToggleTools ? " active" : ""}`} >
-            {
-              tools.map((object, i) => (
-                <div className="seed-product"
-                  title={object.title}
-                  key={i}
-                  onClick={() => { return addToolToUse(i); }}
-                  style={isMenuToggleTools ? {} : { display: "none" }}
-                >
-                  <ToolItem
-                    price={object.price}
-                    image={object.toolImg}
-                  />
-                </div>
-              ))
-            }
+            <div
+              className={`seed-product${(tools[0].title === 'Spade' && isSpadeActive === true) ? " active" : ""}`}
+              title={tools[0].title}
+              key={0}
+              onClick={() => { return addToolToUse(0); }}
+              style={isMenuToggleTools ? { justifyContent: 'center', alignItems: 'center' } : { display: "none" }}
+            >
+              <ToolItem
+                price={tools[0].price}
+                image={tools[0].toolImg}
+              />
+            </div>
+            <div
+              className={`seed-product${(tools[1].title === 'Butterfly Net' && isBNetActive === true) ? " active" : ""}`}
+              title={tools[1].title}
+              key={1}
+              onClick={() => { return addToolToUse(1); }}
+              style={isMenuToggleTools ? { justifyContent: 'center', alignItems: 'center' } : { display: "none" }}
+            >
+              <ToolItem
+                price={tools[1].price}
+                image={tools[1].toolImg}
+              />
+            </div>
           </div>
         </div>
       </div>

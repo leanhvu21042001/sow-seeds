@@ -208,14 +208,10 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
                     clearTimeout(timeoutID.current);
                     timer_value.current = 0;
                     count_harvesting.current = 0;
-                    setSeed((prevState) => {
-                        let obj = { ...prevState };
-                        obj.isDead = true;
-                        obj.beAbleToHarvest = false;
-                        obj.currentState = 'dead';
-                        return obj;
-                    });
-                    addOrRemovePlant(-1);
+                    setSeed({});
+                    if (numerOfPlants > 0 && img_src !== '') {
+                        addOrRemovePlant(-1);
+                    }
                 }
             }
         }

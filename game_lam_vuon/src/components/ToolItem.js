@@ -5,9 +5,9 @@ export default function ToolItem(props) {
   return (
     <>
       <img className="product-image" src={image} alt={title} />
-      <div className="product-quantity" style={{textAlign: 'center'}}>
-        <span className="quantity">0</span>
-      </div>
+      {/* <div className="product-quantity" style={{textAlign: 'center'}}>
+        <span className="quantity">{quantity}</span>
+      </div> */}
     </>
   )
 }
