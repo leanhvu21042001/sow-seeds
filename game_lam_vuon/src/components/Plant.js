@@ -153,12 +153,13 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
         if (seed.currentState === 'plant_lv2') {
             if (seed.beAbleToHarvest === true && count_harvesting.current < seed.numberOfHarvestTime) {
                 count_harvesting.current = count_harvesting.current + 1;
-                harvestAndSellPlant(seed.price_of_plant);
                 
                 if (isAnimalAppeared === true) {
-                    showMessageBox(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant - (0.5 * seed.price_of_plant)}.\n(Đã giảm $${(0.5 * seed.price_of_plant)} do sâu bọ!)`);
+                    harvestAndSellPlant(seed.price_of_plant - (0.5 * seed.price_of_plant));
+                    showMessageBox(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant - (0.5 * seed.price_of_plant)}.\n(Đã bị giảm $${(0.5 * seed.price_of_plant)} do sâu bọ!)`);
                 }
                 else {
+                    harvestAndSellPlant(seed.price_of_plant);
                     showMessageBox(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant}.`);
                 }
                 
@@ -240,7 +241,7 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
     }
 
     useEffect(() => {
-        if (img_class === ' plant-img') {
+        if (img_class === ' plant-img' && Math.floor(Math.random() * 5) === 0) {
             setIsAnimalAppeared(true);
             // Set animalImgName:
             if (animalImgName.current === '') {
