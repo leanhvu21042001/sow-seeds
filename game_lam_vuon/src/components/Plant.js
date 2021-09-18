@@ -3,6 +3,7 @@ import flowerImgs from './../services/flower.service';
 import plantImgs from './../services/plant.service';
 import seedImgs from './../services/seed.service';
 import toolImgs from './../services/tool.service';
+import animalImgs from './../services/animal.service';
 import CountdownTimer from './CountdownTimer';
 
 function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSellPlant, seedName, numerOfPlants, setPlantName, addOrRemovePlant, showMessageBox }) {
@@ -13,6 +14,8 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
     const count_harvesting = useRef(0);
     const timer_value = useRef(0);
     const timeoutID = useRef(0);
+    const [isAnimalAppeared, setIsAnimalAppeared] = useState(false);
+    const animalImgName = useRef('');
 
     // Start to seed:
     const doSeeding = () => {
@@ -151,7 +154,13 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
             if (seed.beAbleToHarvest === true && count_harvesting.current < seed.numberOfHarvestTime) {
                 count_harvesting.current = count_harvesting.current + 1;
                 harvestAndSellPlant(seed.price_of_plant);
-                showMessageBox(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant}.`);
+                
+                if (isAnimalAppeared === true) {
+                    showMessageBox(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant - (0.5 * seed.price_of_plant)}.\n(Đã giảm $${(0.5 * seed.price_of_plant)} do sâu bọ!)`);
+                }
+                else {
+                    showMessageBox(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant}.`);
+                }
                 
                 // Change image after harvesting:
                 // setImgSrc(plantImgs[seed.img_forPlant_lv1]);
@@ -217,6 +226,53 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
         }
     }
 
+    // Click on the animal:
+    const onClick_animal = (e) => {
+        e.stopPropagation();
+        if (toolsInUse.length > 0) {
+            for (let i = 0; i < toolsInUse.length; i++) {
+                if (toolsInUse[i].title === 'Butterfly Net') {
+                    setIsAnimalAppeared(false);
+                    animalImgName.current = '';
+                }
+            }
+        }
+    }
+
+    useEffect(() => {
+        if (img_class === ' plant-img') {
+            setIsAnimalAppeared(true);
+            // Set animalImgName:
+            if (animalImgName.current === '') {
+                let randomAnimalIndex = Math.floor(Math.random() * 6);
+                let index = 0;
+                for (const key in animalImgs) {
+                    if (index === randomAnimalIndex) {
+                        animalImgName.current = key;
+                        break;
+                    }
+                    index++;
+                }
+            }
+        }
+        else {
+            setIsAnimalAppeared(false);
+        }
+    }, [img_class]);
+
+    const renderAnimalComponent = () => {
+        if (isAnimalAppeared === true) {
+            return (
+                <div className="animal">
+                    <img className="animal-img"
+                        src={animalImgs[animalImgName.current]} alt="animal-btn-img"
+                        onClick={(e) => { return onClick_animal(e); }}>
+                    </img>
+                </div>
+            )
+        }
+    }
+
     return (
         <div className="plant" onClick={(e) => { return onClick_ground(e); }}>
             {/* {console.log( {1: seed.beAbleToHarvest, 2: seed.currentState, 3: timer_value.current})} */}
@@ -225,6 +281,7 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
                 <img className="plant-btn-img" src={plantBtn_src} alt="plant-btn-img"></img>
             </div>
             <CountdownTimer timer_value={timer_value.current}></CountdownTimer>
+            {renderAnimalComponent()}
         </div>
     );
 }
