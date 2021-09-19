@@ -6,8 +6,14 @@ import ToolItem from '../components/ToolItem';
 import UserBar from '../components/UserBar';
 import userImage from './../services/user.service'
 import toolImgs from '../services/tool.service';
+import { sound } from  '../services/sound.service';
 
 function App() {
+  // Sounds:
+  const sound_glimmer = useRef(new Audio(sound.glimmer));
+  const sound_zigzag = useRef(new Audio(sound.zigzag));
+  const sound_flash = useRef(new Audio(sound.flash));
+
   const [isSpadeActive, setIsSpadeActive] = useState(false);
   const [isBNetActive, setIsBNetActive] = useState(false);
 
@@ -202,7 +208,7 @@ function App() {
   // Component:
   return (
     <div className="game-section">
-      <MainSection bag={bag} toolsInUse={toolsInUse} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} showMessageBox={showMessageBox}></MainSection>
+      <MainSection bag={bag} toolsInUse={toolsInUse} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} showMessageBox={showMessageBox} sound_glimmer={sound_glimmer} sound_zigzag={sound_zigzag} sound_flash={sound_flash}></MainSection>
 
       <MenuSection></MenuSection>
 

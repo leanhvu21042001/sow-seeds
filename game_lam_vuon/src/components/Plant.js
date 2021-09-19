@@ -6,7 +6,7 @@ import toolImgs from './../services/tool.service';
 import animalImgs from './../services/animal.service';
 import CountdownTimer from './CountdownTimer';
 
-function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSellPlant, seedName, numerOfPlants, setPlantName, addOrRemovePlant, showMessageBox }) {
+function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSellPlant, seedName, numerOfPlants, setPlantName, addOrRemovePlant, showMessageBox, sound_glimmer, sound_zigzag, sound_flash }) {
     const [seed, setSeed] = useState({});
     const [img_class, setImgClass] = useState('');
     const [img_src, setImgSrc] = useState('');
@@ -35,6 +35,9 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
                     removeLastItemFromBag();
                     return item;
                 });
+                sound_zigzag.current.pause();
+                sound_zigzag.current.currentTime = 0;
+                sound_zigzag.current.play();
             }
             else {
                 showMessageBox('LƯU Ý: Một luống đất chỉ được trồng một loại cây!');
@@ -163,8 +166,7 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
                     showMessageBox(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant}.`);
                 }
                 
-                // Change image after harvesting:
-                // setImgSrc(plantImgs[seed.img_forPlant_lv1]);
+                // Change states after harvesting:
                 clearTimeout(timeoutID.current);
                 if (seed.numberOfHarvestTime < 3) {
                     setSeed((prevState) => {
@@ -185,6 +187,11 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
                     });
                     addOrRemovePlant(-1);
                 }
+
+                // Play sound:
+                sound_flash.current.pause();
+                sound_flash.current.currentTime = 0;
+                sound_flash.current.play();
             }
             else {
                 showMessageBox('Bạn đã thu hoạch cây này rồi!');
@@ -231,13 +238,23 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
     // Click on the animal:
     const onClick_animal = (e) => {
         e.stopPropagation();
+        let count = 0;
         if (toolsInUse.length > 0) {
             for (let i = 0; i < toolsInUse.length; i++) {
                 if (toolsInUse[i].title === 'Butterfly Net') {
                     setIsAnimalAppeared(false);
                     animalImgName.current = '';
+                    count++;
+                    // Play sound:
+                    sound_glimmer.current.pause();
+                    sound_glimmer.current.currentTime = 0;
+                    sound_glimmer.current.play();
+                    break;
                 }
             }
+        }
+        if (count === 0) {
+            showMessageBox('Bạn cần dùng công cụ bắt sâu bọ!');
         }
     }
 
