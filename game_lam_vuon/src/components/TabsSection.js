@@ -3,7 +3,7 @@ import SettingSection from './SettingSection';
 import AboutSection from './AboutSection';
 
 function TabsSection({ isAudioMuted, setIsAudioMuted, onChange_SoundSlider,
-    isPausedBGM, bgmVolume, setIsPausedBGM, stopBGM, setBgmVolume }) {
+    isPausedBGM, bgmVolume, setIsPausedBGM, stopBGM, setBgmVolume, money }) {
 
     return (
         <div className="tabs-section">
@@ -11,7 +11,9 @@ function TabsSection({ isAudioMuted, setIsAudioMuted, onChange_SoundSlider,
             <label className="tab-btn" htmlFor="tab-1">Profile</label>
             <div className="tab">
                 <div className="tab-content">
-                    <ProfileSection></ProfileSection>
+                    <ProfileSection
+                        money={money}
+                    ></ProfileSection>
                 </div>
             </div>
 

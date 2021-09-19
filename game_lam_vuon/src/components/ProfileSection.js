@@ -1,6 +1,6 @@
 import img_user from '../assets/images/User/user.jpg';
 
-function ProfileSection() {
+function ProfileSection({ money }) {
     return (
         <div className="profile-section">
             <div className="left-section">
@@ -16,7 +16,7 @@ function ProfileSection() {
                 </div>
                 <div className="user-money-wrapper">
                     <div className="user-money">
-                        <div className="money-text">$ 0</div>
+                        <div className="money-text">$ {money}</div>
                     </div>
                 </div>
                 <a className="sign-out-btn" href="/">Sign out</a>
