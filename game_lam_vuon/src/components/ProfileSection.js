@@ -2,8 +2,7 @@ import { useContext } from 'react';
 import UserContext from '../store/contexts/UserContext';
 
 function ProfileSection() {
-    const { name, imageString, money, level } = useContext(UserContext);
-
+    const { name, imageString, money, level, logout} = useContext(UserContext);
     return (
         <div className="profile-section">
             <div className="left-section">
@@ -25,7 +24,9 @@ function ProfileSection() {
                         <div className="money-text">$ {money}</div>
                     </div>
                 </div>
-                <a className="sign-out-btn" href="/">Sign out</a>
+                <a
+                    onClick={() => {logout()}}
+                    className="sign-out-btn" href="/">Sign out</a>
             </div>
 
             <div className="right-section">

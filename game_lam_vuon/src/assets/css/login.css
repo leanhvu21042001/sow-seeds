@@ -1,0 +1,51 @@
+.login {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login .login__name {
+  width: 40vw;
+  padding: 6px;
+  font-size: 2vw;
+  margin-bottom: 5px;
+  transition: 0.1s;
+  border-radius: 5px;
+}
+
+.login .login__confirm {
+  width: 40vw;
+  padding: 6px;
+  font-size: 2vw;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.1s;
+  border-radius: 5px;
+}
+
+
+@media screen and (max-width: 992px) {
+  .login .login__name {
+    width: 70vw;
+    transition: 0.1s;
+    font-size: 4vw;
+  }
+  .login .login__confirm {
+    width: 70vw;
+    transition: 0.1s;
+    font-size: 4vw;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .login .login__name {
+    font-size: 6vw;
+    transition: 0.1s;
+  }
+  .login .login__confirm {
+    font-size: 6vw;
+    transition: 0.1s;
+  }
+}

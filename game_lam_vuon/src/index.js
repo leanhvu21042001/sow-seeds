@@ -2,14 +2,31 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './assets/css/_base.css';
 import App from './views/App';
+import Login from './views/Login';
 import reportWebVitals from './reportWebVitals';
 import UserProvider from './store/providers/UserProvider';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserProvider >
-      <App />
-    </UserProvider>
+    <Router>
+      <Switch>
+
+        <Route path="/login">
+          <Login />
+        </Route>
+
+        <Route path="/">
+          <UserProvider >
+            <App />
+          </UserProvider>
+        </Route>
+      </Switch>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

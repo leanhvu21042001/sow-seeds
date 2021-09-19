@@ -1,7 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router';
 import UserContext from "../contexts/UserContext";
 import userImage from './../../services/user.service'
+
 const UserProvider = ({ children }) => {
+
+  const history = useHistory();
 
   // props
   const [name, setName] = useState("Trần Giả Trân");
@@ -10,9 +14,25 @@ const UserProvider = ({ children }) => {
   const [level, setLevel] = useState(0);
   const [lastLoginTime, setLastLoginTime] = useState();
   const [numberOfHavestTimes, setNumberOfHavestTimes] = useState(0);
-  // Functions
 
+  useEffect(() => {
+    const uid = localStorage.getItem("uid");
+    if (uid === null) {
+      localStorage.removeItem("uid")
+      history.push('/login');
+      return;
+    } else {
+      setName(uid);
+    }
 
+  }, [history]);
+
+  const logout = () => {
+    localStorage.removeItem("uid")
+    history.push('/login');
+  }
+
+  // data-passing
   const data = {
     name
     , setName
@@ -26,6 +46,7 @@ const UserProvider = ({ children }) => {
     , setLastLoginTime
     , numberOfHavestTimes
     , setNumberOfHavestTimes
+    , logout
   };
 
   return (
