@@ -6,29 +6,19 @@ export default function Login() {
 
   useEffect(() => {
     const name = localStorage.getItem('uid');
-    if (name !== null) {
-      setName(name);
-    }
+    if (name !== null) setName(name);
   }, []);
 
   const handleOnEnter = (event) => {
-    if (event.code === "Enter") {
-      handleClickButton();
-    }
+    if (event.code === "Enter") handleClickButton();
   }
 
-  const handleClickButton = () => {
-    handleSubmit();
-  }
+  const handleClickButton = () => handleSubmit();
 
   const handleSubmit = () => {
-
-    if (name === "") {
-      return;
-    }
+    if (name === "") return;
     localStorage.setItem('uid', name);
     history.push('/');
-  
   }
 
   return (
