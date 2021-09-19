@@ -1,13 +1,16 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useContext, useRef, useState } from 'react';
 import MainSection from '../components/MainSection';
 import MenuSection from '../components/MenuSection';
 import ShopItem from '../components/ShopItem';
 import ToolItem from '../components/ToolItem';
 import UserBar from '../components/UserBar';
-import userImage from './../services/user.service'
+
 import toolImgs from '../services/tool.service';
+import UserContext from '../store/contexts/UserContext';
 
 function App() {
+  const { name, imageString, money, setMoney, level } = useContext(UserContext);
+  
   const [isSpadeActive, setIsSpadeActive] = useState(false);
   const [isBNetActive, setIsBNetActive] = useState(false);
 
@@ -33,9 +36,6 @@ function App() {
 
   // The seeds you've just bought:
   const [bag, setBag] = useState([]);
-
-  // Your money:
-  const [money, setMoney] = useState(100);
 
   // Your tools in use:
   const [toolsInUse, setToolsInUse] = useState([]);
@@ -197,7 +197,7 @@ function App() {
   }
 
 
-
+  
 
   // Component:
   return (
@@ -266,10 +266,10 @@ function App() {
 
       <div className="user-section">
         <UserBar
-          name={"username"}
-          imageString={userImage}
+          name={name}
+          imageString={imageString}
           score={money}
-          level={"0"}
+          level={level}
         />
       </div>
 
