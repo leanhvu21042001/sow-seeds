@@ -2,7 +2,7 @@ import ProfileSection from './ProfileSection';
 import SettingSection from './SettingSection';
 import AboutSection from './AboutSection';
 
-function TabsSection({ isMutedAudio, setIsMutedAudio, onChange_SoundSlider,
+function TabsSection({ isAudioMuted, setIsAudioMuted, onChange_SoundSlider,
     isPausedBGM, bgmVolume, setIsPausedBGM, stopBGM, setBgmVolume }) {
 
     return (
@@ -20,8 +20,8 @@ function TabsSection({ isMutedAudio, setIsMutedAudio, onChange_SoundSlider,
             <div className="tab">
                 <div className="tab-content">
                     <SettingSection
-                        isMutedAudio={isMutedAudio}
-                        setIsMutedAudio={setIsMutedAudio}
+                        isAudioMuted={isAudioMuted}
+                        setIsAudioMuted={setIsAudioMuted}
                         onChange_SoundSlider={onChange_SoundSlider}
                         isPausedBGM={isPausedBGM}
                         bgmVolume={bgmVolume}

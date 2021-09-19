@@ -1,6 +1,6 @@
 import React from "react";
 
-function SettingSection({ isMutedAudio, setIsMutedAudio, onChange_SoundSlider,
+function SettingSection({ isAudioMuted, setIsAudioMuted, onChange_SoundSlider,
     isPausedBGM, bgmVolume, setIsPausedBGM, stopBGM, setBgmVolume }) {
 
     return (
@@ -48,10 +48,10 @@ function SettingSection({ isMutedAudio, setIsMutedAudio, onChange_SoundSlider,
                     <div className="soundSetting-btns">
                         <div
                             onClick={() => {
-                                return setIsMutedAudio(!isMutedAudio);
+                                setIsAudioMuted(!isAudioMuted)
                             }}
                             className="soundSetting-btn" id="btn-MuteUnmute_sound">
-                            {isMutedAudio ? "Unmute" : "Mute"}
+                            {isAudioMuted ? "Unmute" : "Mute"}
                         </div>
                     </div>
                     <div className="soundSetting-slider">
