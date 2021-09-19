@@ -14,7 +14,7 @@ function App() {
   const sound_glimmer = useRef(new Audio(sound.glimmer));
   const sound_zigzag = useRef(new Audio(sound.zigzag));
   const sound_flash = useRef(new Audio(sound.flash));
-  const sound_pop_1= useRef(new Audio(sound.pop_1));
+  const sound_pop_1 = useRef(new Audio(sound.pop_1));
 
   const [isSpadeActive, setIsSpadeActive] = useState(false);
   const [isBNetActive, setIsBNetActive] = useState(false);
@@ -204,6 +204,7 @@ function App() {
     });
   }
 
+  // Sounds:
   useEffect(() => {
     if (isAudioMuted === true) {
       sound_flash.current.muted = true;
@@ -219,6 +220,13 @@ function App() {
     }
   });
 
+  const onChange_SoundSlider = ({ target }) => {
+    sound_flash.current.volume = target.value / 100;
+    sound_glimmer.current.volume = target.value / 100;
+    sound_pop_1.current.volume = target.value / 100;
+    sound_zigzag.current.volume = target.value / 100;
+  }
+
 
 
   // Component:
@@ -226,7 +234,7 @@ function App() {
     <div className="game-section">
       <MainSection bag={bag} toolsInUse={toolsInUse} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} showMessageBox={showMessageBox} sound_glimmer={sound_glimmer} sound_zigzag={sound_zigzag} sound_flash={sound_flash}></MainSection>
 
-      <MenuSection isAudioMuted={isAudioMuted} setIsAudioMuted={setIsAudioMuted} sound_pop_1={sound_pop_1}></MenuSection>
+      <MenuSection isAudioMuted={isAudioMuted} setIsAudioMuted={setIsAudioMuted} sound_pop_1={sound_pop_1} onChange_SoundSlider={onChange_SoundSlider}></MenuSection>
 
       {/* Seeds: */}
       <div className="shop-section" style={{ position: 'fixed', top: 0, left: 0 }}>

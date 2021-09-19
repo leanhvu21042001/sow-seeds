@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { backgroundMusic } from '../services/sound.service';
 import TabsSection from './TabsSection';
 
-function MenuSection({ isAudioMuted, setIsAudioMuted, sound_pop_1 }) {
+function MenuSection({ isAudioMuted, setIsAudioMuted, sound_pop_1, onChange_SoundSlider }) {
     // 1.1. Background music:
     const [bgMusic] = useState(new Audio(backgroundMusic.ThePianoGuys_RachelPlatten_ThisIsYourFightSong));
 
@@ -29,10 +29,6 @@ function MenuSection({ isAudioMuted, setIsAudioMuted, sound_pop_1 }) {
     const onClick_MenuBtn = () => {
         onClick_MenuOverlay();
         sound_pop_1.current.play();
-    }
-
-    const onChange_SoundSlider = ({ target }) => {
-        sound_pop_1.current.volume = target.value / 100;
     }
 
 
