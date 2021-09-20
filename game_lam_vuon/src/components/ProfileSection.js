@@ -12,7 +12,7 @@ function ProfileSection() {
                 let currentNum = levelStages_ByHarvestTime.current[level];
                 let maxValue = currentNum - prevNum;
                 let currentValue = numberOfHavestTimes - prevNum;
-                console.log(((currentValue / maxValue) * 100) + '%');
+                // console.log(((currentValue / maxValue) * 100) + '%');
                 setLevelFiller(() => {
                     return ((currentValue / maxValue) * 100) + '%';
                 })
@@ -59,7 +59,7 @@ function ProfileSection() {
                     </div>
                     <div className="user-info">
                         <span className="info-title">Number of harvest times:</span>
-                        <span className="info-detail">0</span>
+                        <span className="info-detail">{numberOfHavestTimes}</span>
                     </div>
                 </div>
             </div>
