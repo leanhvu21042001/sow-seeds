@@ -16,14 +16,14 @@ ReactDOM.render(
     <Router>
       <Switch>
 
-        <Route path="/login">
-          <Login />
-        </Route>
-
-        <Route path="/">
+        <Route path="/" exact>
           <UserProvider >
             <App />
           </UserProvider>
+        </Route>
+
+        <Route path="/login">
+          <Login />
         </Route>
 
       </Switch>
