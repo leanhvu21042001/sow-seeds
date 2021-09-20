@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import UserContext from '../store/contexts/UserContext';
 
 function ProfileSection() {
-    const { name, imageString, money, level, numberOfHavestTimes, levelStages_ByHarvestTime, logout } = useContext(UserContext);
+    const { name, imageString, money, level, numberOfHavestTimes, levelStages_ByHarvestTime, numberOfPestsKilled, logout } = useContext(UserContext);
     const [levelFiller, setLevelFiller] = useState('0%');
 
     useEffect(() => {
@@ -53,13 +53,17 @@ function ProfileSection() {
 
             <div className="right-section">
                 <div className="user-info-wrapper">
-                    <div className="user-info">
+                    {/* <div className="user-info">
                         <span className="info-title">Last login time:</span>
                         <span className="info-detail">Aug 31, 2021</span>
-                    </div>
+                    </div> */}
                     <div className="user-info">
                         <span className="info-title">Number of harvest times:</span>
                         <span className="info-detail">{numberOfHavestTimes}</span>
+                    </div>
+                    <div className="user-info">
+                        <span className="info-title">Number of pests killed:</span>
+                        <span className="info-detail">{numberOfPestsKilled}</span>
                     </div>
                 </div>
             </div>

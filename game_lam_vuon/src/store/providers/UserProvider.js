@@ -18,6 +18,8 @@ const UserProvider = ({ children }) => {
 
   const [lastLoginTime, setLastLoginTime] = useState();
 
+  const [numberOfPestsKilled, setNumberOfPestsKilled] = useState(0);
+
 
   // Log in:
   useEffect(() => {
@@ -72,6 +74,8 @@ const UserProvider = ({ children }) => {
     , numberOfHavestTimes
     , setNumberOfHavestTimes
     , levelStages_ByHarvestTime
+    , numberOfPestsKilled
+    , setNumberOfPestsKilled
     , lastLoginTime
     , setLastLoginTime
     , logout

@@ -4,6 +4,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: rgba(154, 205, 50, 0.5);
+}
+
+.login .login-box-title {
+  margin-bottom: 50px;
+    font-size: 4vw;
+    font-weight: bold;
+    color: yellowgreen;
+    text-shadow: 0px 1px 1px #000;
+    text-align: center;
 }
 
 .login .login__name {
@@ -13,6 +23,10 @@
   margin-bottom: 5px;
   transition: 0.1s;
   border-radius: 5px;
+  outline: none;
+  border: none;
+  background: none;
+  border-left: 5px solid yellowgreen;
 }
 
 .login .login__confirm {
@@ -23,8 +37,16 @@
   cursor: pointer;
   transition: 0.1s;
   border-radius: 5px;
+  outline: none;
+  border: none;
+  background-color: yellowgreen;
+  color: #fff;
 }
 
+.login .login__confirm:hover {
+  background-color: tomato;
+  color: #fff;
+}
 
 @media screen and (max-width: 992px) {
   .login .login__name {
@@ -47,5 +69,8 @@
   .login .login__confirm {
     font-size: 6vw;
     transition: 0.1s;
+  }
+  .login .login-box-title {
+    font-size: 30px;
   }
 }

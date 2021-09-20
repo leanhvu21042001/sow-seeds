@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router';
+
 export default function Login() {
   const history = useHistory();
   const [name, setName] = useState("");
@@ -23,11 +24,12 @@ export default function Login() {
 
   return (
     <div className="login">
+      <div className="login-box-title">Welcome to Gardening Game!</div>
       <input
         defaultValue={name}
         onKeyDown={(e) => handleOnEnter(e)}
         onChange={(e) => setName(e.target.value)}
-        placeholder="Enter your name" className="login__name" />
+        placeholder="Enter your name" className="login__name" autoFocus />
       <button
         onClick={() => { handleClickButton() }}
         type="submit" className="login__confirm">Confirm!</button>

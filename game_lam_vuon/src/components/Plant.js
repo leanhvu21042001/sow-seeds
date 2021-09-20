@@ -6,7 +6,7 @@ import toolImgs from './../services/tool.service';
 import animalImgs from './../services/animal.service';
 import CountdownTimer from './CountdownTimer';
 
-function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSellPlant, seedName, numerOfPlants, setPlantName, addOrRemovePlant, showMessageBox, sound_glimmer, sound_zigzag, sound_flash }) {
+function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSellPlant, seedName, numerOfPlants, setPlantName, addOrRemovePlant, showMessageBox, sound_glimmer, sound_zigzag, sound_flash, setNumberOfPestsKilled }) {
     const [seed, setSeed] = useState({});
     const [img_class, setImgClass] = useState('');
     const [img_src, setImgSrc] = useState('');
@@ -249,6 +249,10 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
                     sound_glimmer.current.pause();
                     sound_glimmer.current.currentTime = 0;
                     sound_glimmer.current.play();
+                    // Set numberOfPestsKilled:
+                    setNumberOfPestsKilled((prevState) => {
+                        return prevState + 1;
+                    });
                     break;
                 }
             }
