@@ -4,7 +4,7 @@ function AboutSection() {
         <div className="about-section">
             <div className="game-name">GARDENING GAME</div>
             <div className="intro">This game is made by Nguyễn Phúc Linh and Lê Anh Vũ.</div>
-            <Link href="/">How to Play tutorial video</Link>
+            <Link to={"/"}>How to Play tutorial video</Link>
         </div>
     );
 }
