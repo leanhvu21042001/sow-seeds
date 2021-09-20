@@ -61,7 +61,7 @@ function App() {
       img_forPlant_lv2: 'img_Eschscholzia',
       timeToGrowUp: 5,
       timeFromLv1ToLv2: 15,
-      timeFromLv2ToLv1: 10
+      timeFromLv2ToLv1: 30
     },
     {
       id: 1,
@@ -73,7 +73,7 @@ function App() {
       img_forPlant_lv2: 'img_MorningGlory',
       timeToGrowUp: 15,
       timeFromLv1ToLv2: 30,
-      timeFromLv2ToLv1: 25
+      timeFromLv2ToLv1: 30
     },
     {
       id: 2,
@@ -85,7 +85,7 @@ function App() {
       img_forPlant_lv2: 'img_Pansy',
       timeToGrowUp: 30,
       timeFromLv1ToLv2: 50,
-      timeFromLv2ToLv1: 15
+      timeFromLv2ToLv1: 30
     },
     {
       id: 3,
