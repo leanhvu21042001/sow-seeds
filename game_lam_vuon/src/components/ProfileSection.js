@@ -13,7 +13,7 @@ function ProfileSection() {
                 <div className="user-level-wrapper">
                     <div className="user-level">
                         <div className="level-filler"
-                            style={{ width: `${level}%` }}
+                            style={{ width: `${level/100}%` }}
                         >
                         </div>
                         <div className="level-text">Level {level}</div>
