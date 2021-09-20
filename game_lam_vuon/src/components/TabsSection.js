@@ -3,7 +3,8 @@ import SettingSection from './SettingSection';
 import AboutSection from './AboutSection';
 
 function TabsSection({ isAudioMuted, setIsAudioMuted, onChange_SoundSlider,
-    isPausedBGM, bgmVolume, setIsPausedBGM, stopBGM, setBgmVolume, money }) {
+    isPausedBGM, bgmVolume, setIsPausedBGM, stopBGM, setBgmVolume, money, 
+    currentLevel, numberOfHarvestingTime, levelStages_ByHarvestingTime }) {
 
     return (
         <div className="tabs-section">
@@ -13,6 +14,9 @@ function TabsSection({ isAudioMuted, setIsAudioMuted, onChange_SoundSlider,
                 <div className="tab-content">
                     <ProfileSection
                         money={money}
+                        currentLevel={currentLevel}
+                        numberOfHarvestingTime={numberOfHarvestingTime}
+                        levelStages_ByHarvestingTime={levelStages_ByHarvestingTime}
                     ></ProfileSection>
                 </div>
             </div>

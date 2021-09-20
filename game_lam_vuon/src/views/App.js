@@ -16,6 +16,7 @@ function App() {
   const sound_flash = useRef(new Audio(sound.flash));
   const sound_pop_1 = useRef(new Audio(sound.pop_1));
 
+  // Tool buttons:
   const [isSpadeActive, setIsSpadeActive] = useState(false);
   const [isBNetActive, setIsBNetActive] = useState(false);
 
@@ -32,6 +33,11 @@ function App() {
     message.current = msg;
   }, [hideOrShowMessageBox]);
 
+
+  // Level:
+  const levelStages_ByHarvestingTime = useRef([5, 10, 15, 20, 25, 30, 35, 40, 45, 50]);
+  const [numberOfHarvestingTime, setNumberOfHarvestingTime] = useState(0);
+  const [currentLevel, setCurrentLevel] = useState(0);
 
   // State to check if shop menu (seeds) is active:
   const [isMenuToggle, setIsMenuToggle] = useState(false);
@@ -199,6 +205,9 @@ function App() {
   }
 
   const harvestAndSellPlant = (price_of_plant) => {
+    setNumberOfHarvestingTime((prevState) => {
+      return prevState + 1;
+    })
     setMoney(() => {
       return money + price_of_plant;
     });
@@ -228,13 +237,31 @@ function App() {
   }
 
 
+  // Level:
+  useEffect(() => {
+    // 1. Nếu ở cấp cuối và lớn hơn điều kiện cần để vượt cấp này, thì thành cấp MAX.
+    // 2. Nếu không phải cấp cuối, cho phép lên cấp.
+    if (currentLevel === levelStages_ByHarvestingTime.current.length - 1) {
+      if (numberOfHarvestingTime === levelStages_ByHarvestingTime.current[currentLevel]) {
+        setCurrentLevel('MAX');
+      }
+    }
+    else if (currentLevel < levelStages_ByHarvestingTime.current.length - 1) {
+      if (numberOfHarvestingTime === levelStages_ByHarvestingTime.current[currentLevel]) {
+        setCurrentLevel((prevState) => {
+          return prevState + 1;
+        });
+      }
+    }
+  }, [numberOfHarvestingTime, currentLevel]);
+
 
   // Component:
   return (
     <div className="game-section">
       <MainSection bag={bag} toolsInUse={toolsInUse} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} showMessageBox={showMessageBox} sound_glimmer={sound_glimmer} sound_zigzag={sound_zigzag} sound_flash={sound_flash}></MainSection>
 
-      <MenuSection isAudioMuted={isAudioMuted} setIsAudioMuted={setIsAudioMuted} sound_pop_1={sound_pop_1} onChange_SoundSlider={onChange_SoundSlider} money={money}></MenuSection>
+      <MenuSection isAudioMuted={isAudioMuted} setIsAudioMuted={setIsAudioMuted} sound_pop_1={sound_pop_1} onChange_SoundSlider={onChange_SoundSlider} money={money} currentLevel={currentLevel} numberOfHarvestingTime={numberOfHarvestingTime} levelStages_ByHarvestingTime={levelStages_ByHarvestingTime}></MenuSection>
 
       {/* Seeds: */}
       <div className="shop-section" style={{ position: 'fixed', top: 0, left: 0 }}>
@@ -299,7 +326,7 @@ function App() {
           name={"username"}
           imageString={userImage}
           score={money}
-          level={"0"}
+          level={currentLevel}
         />
       </div>
 

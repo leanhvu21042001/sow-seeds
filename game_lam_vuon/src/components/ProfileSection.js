@@ -1,6 +1,29 @@
+import { useEffect, useState } from 'react';
 import img_user from '../assets/images/User/user.jpg';
 
-function ProfileSection({ money }) {
+function ProfileSection({ money, currentLevel, numberOfHarvestingTime, levelStages_ByHarvestingTime }) {
+    const [levelFiller, setLevelFiller] = useState('0%');
+
+    useEffect(() => {
+        if (currentLevel !== 'MAX') {
+            if (currentLevel > 0) {
+                let prevNum = (levelStages_ByHarvestingTime.current[currentLevel - 1]);
+                let currentNum = levelStages_ByHarvestingTime.current[currentLevel];
+                let maxValue = currentNum - prevNum;
+                let currentValue = numberOfHarvestingTime - prevNum;
+                console.log(((currentValue / maxValue) * 100) + '%');
+                setLevelFiller(() => {
+                    return ((currentValue / maxValue) * 100) + '%';
+                })
+            }
+            else {
+                setLevelFiller(() => {
+                    return ((numberOfHarvestingTime / levelStages_ByHarvestingTime.current[currentLevel]) * 100) + '%';
+                });
+            }
+        }
+    }, [currentLevel, numberOfHarvestingTime, levelStages_ByHarvestingTime]);
+
     return (
         <div className="profile-section">
             <div className="left-section">
@@ -10,8 +33,8 @@ function ProfileSection({ money }) {
                 <div className="user-name">Trần Giả Trân</div>
                 <div className="user-level-wrapper">
                     <div className="user-level">
-                        <div className="level-filler"></div>
-                        <div className="level-text">Level 0</div>
+                        <div className="level-filler" style={{width:levelFiller}}></div>
+                        <div className="level-text">Level {currentLevel}</div>
                     </div>
                 </div>
                 <div className="user-money-wrapper">
