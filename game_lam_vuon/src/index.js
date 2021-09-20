@@ -11,6 +11,11 @@ import {
   Route
 } from "react-router-dom";
 
+console.log("%c Kết thúc đồ án Front End 2", "color: red; font-weight: bold; font-size: 4vw;");
+console.log("%c Thành viên:", "color: green; font-weight: bold; font-size: 3vw;");
+console.log("%c - Nguyễn Phúc Linh", "color: green; font-weight: bold; font-size: 2vw;");
+console.log("%c - Lê Anh Vũ", "color: green; font-weight: bold; font-size: 2vw;");
+
 ReactDOM.render(
   <React.StrictMode>
     <Router>
