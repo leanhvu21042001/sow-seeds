@@ -10,7 +10,7 @@ const UserProvider = ({ children }) => {
   // props
   const [name, setName] = useState("Trần Giả Trân");
   const [imageString, setImageString] = useState(userImage);
-  const [money, setMoney] = useState(300);
+  const [money, setMoney] = useState(100000);
   const [level, setLevel] = useState(0);
   const [lastLoginTime, setLastLoginTime] = useState();
   const [numberOfHavestTimes, setNumberOfHavestTimes] = useState(0);

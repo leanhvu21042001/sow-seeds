@@ -7,7 +7,7 @@
 ### firebase:
 
 - làm vườn:
-  + [ ] <b>(Linh)</b>:
+  + [x] <b>(Linh)</b>:
   - [x] trồng
   - [x] Chuyển giữa cây xanh và có hoa
   - [x] tính countdown timer.
@@ -25,6 +25,6 @@
 - (mua hàng và cho vào túi:)
 
 
-- [ ] tính level: <b>(Linh, Vũ)</b>
+- [x] tính level: <b>(Linh, Vũ)</b>
 
 - (đăng nhập: )
