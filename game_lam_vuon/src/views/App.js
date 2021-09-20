@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useRef, useState } from 'react';
+import React, { useCallback, useContext, useRef, useState, useEffect } from 'react';
 import MainSection from '../components/MainSection';
 import MenuSection from '../components/MenuSection';
 import ShopItem from '../components/ShopItem';
@@ -7,10 +7,17 @@ import UserBar from '../components/UserBar';
 
 import toolImgs from '../services/tool.service';
 import UserContext from '../store/contexts/UserContext';
+import { sound } from '../services/sound.service';
 
 function App() {
   const { name, imageString, money, setMoney, level } = useContext(UserContext);
-  
+  // Sounds:
+  const [isAudioMuted, setIsAudioMuted] = useState(false);
+  const sound_glimmer = useRef(new Audio(sound.glimmer));
+  const sound_zigzag = useRef(new Audio(sound.zigzag));
+  const sound_flash = useRef(new Audio(sound.flash));
+  const sound_pop_1 = useRef(new Audio(sound.pop_1));
+
   const [isSpadeActive, setIsSpadeActive] = useState(false);
   const [isBNetActive, setIsBNetActive] = useState(false);
 
@@ -196,15 +203,37 @@ function App() {
     });
   }
 
+  // Sounds:
+  useEffect(() => {
+    if (isAudioMuted === true) {
+      sound_flash.current.muted = true;
+      sound_glimmer.current.muted = true;
+      sound_pop_1.current.muted = true;
+      sound_zigzag.current.muted = true;
+    }
+    else {
+      sound_flash.current.muted = false;
+      sound_glimmer.current.muted = false;
+      sound_pop_1.current.muted = false;
+      sound_zigzag.current.muted = false;
+    }
+  });
+
+  const onChange_SoundSlider = ({ target }) => {
+    sound_flash.current.volume = target.value / 100;
+    sound_glimmer.current.volume = target.value / 100;
+    sound_pop_1.current.volume = target.value / 100;
+    sound_zigzag.current.volume = target.value / 100;
+  }
 
   
 
   // Component:
   return (
     <div className="game-section">
-      <MainSection bag={bag} toolsInUse={toolsInUse} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} showMessageBox={showMessageBox}></MainSection>
+      <MainSection bag={bag} toolsInUse={toolsInUse} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} showMessageBox={showMessageBox} sound_glimmer={sound_glimmer} sound_zigzag={sound_zigzag} sound_flash={sound_flash}></MainSection>
 
-      <MenuSection></MenuSection>
+      <MenuSection isAudioMuted={isAudioMuted} setIsAudioMuted={setIsAudioMuted} sound_pop_1={sound_pop_1} onChange_SoundSlider={onChange_SoundSlider} money={money}></MenuSection>
 
       {/* Seeds: */}
       <div className="shop-section" style={{ position: 'fixed', top: 0, left: 0 }}>

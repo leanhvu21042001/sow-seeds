@@ -3,9 +3,10 @@ import flowerImgs from './../services/flower.service';
 import plantImgs from './../services/plant.service';
 import seedImgs from './../services/seed.service';
 import toolImgs from './../services/tool.service';
+import animalImgs from './../services/animal.service';
 import CountdownTimer from './CountdownTimer';
 
-function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSellPlant, seedName, numerOfPlants, setPlantName, addOrRemovePlant, showMessageBox }) {
+function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSellPlant, seedName, numerOfPlants, setPlantName, addOrRemovePlant, showMessageBox, sound_glimmer, sound_zigzag, sound_flash }) {
     const [seed, setSeed] = useState({});
     const [img_class, setImgClass] = useState('');
     const [img_src, setImgSrc] = useState('');
@@ -13,6 +14,8 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
     const count_harvesting = useRef(0);
     const timer_value = useRef(0);
     const timeoutID = useRef(0);
+    const [isAnimalAppeared, setIsAnimalAppeared] = useState(false);
+    const animalImgName = useRef('');
 
     // Start to seed:
     const doSeeding = () => {
@@ -32,6 +35,9 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
                     removeLastItemFromBag();
                     return item;
                 });
+                sound_zigzag.current.pause();
+                sound_zigzag.current.currentTime = 0;
+                sound_zigzag.current.play();
             }
             else {
                 showMessageBox('LƯU Ý: Một luống đất chỉ được trồng một loại cây!');
@@ -150,11 +156,17 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
         if (seed.currentState === 'plant_lv2') {
             if (seed.beAbleToHarvest === true && count_harvesting.current < seed.numberOfHarvestTime) {
                 count_harvesting.current = count_harvesting.current + 1;
-                harvestAndSellPlant(seed.price_of_plant);
-                showMessageBox(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant}.`);
                 
-                // Change image after harvesting:
-                // setImgSrc(plantImgs[seed.img_forPlant_lv1]);
+                if (isAnimalAppeared === true) {
+                    harvestAndSellPlant(seed.price_of_plant - (0.5 * seed.price_of_plant));
+                    showMessageBox(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant - (0.5 * seed.price_of_plant)}.\n(Đã bị giảm $${(0.5 * seed.price_of_plant)} do sâu bọ!)`);
+                }
+                else {
+                    harvestAndSellPlant(seed.price_of_plant);
+                    showMessageBox(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant}.`);
+                }
+                
+                // Change states after harvesting:
                 clearTimeout(timeoutID.current);
                 if (seed.numberOfHarvestTime < 3) {
                     setSeed((prevState) => {
@@ -175,6 +187,11 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
                     });
                     addOrRemovePlant(-1);
                 }
+
+                // Play sound:
+                sound_flash.current.pause();
+                sound_flash.current.currentTime = 0;
+                sound_flash.current.play();
             }
             else {
                 showMessageBox('Bạn đã thu hoạch cây này rồi!');
@@ -185,6 +202,7 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
             showMessageBox('Phải chờ cây trưởng thành mới có thể thu hoạch!');
             // alert("Phải chờ cây trưởng thành mới có thể thu hoạch!");
         }
+        // eslint-disable-next-line
     }, [harvestAndSellPlant, seed, showMessageBox, addOrRemovePlant]);
 
 
@@ -217,6 +235,63 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
         }
     }
 
+    // Click on the animal:
+    const onClick_animal = (e) => {
+        e.stopPropagation();
+        let count = 0;
+        if (toolsInUse.length > 0) {
+            for (let i = 0; i < toolsInUse.length; i++) {
+                if (toolsInUse[i].title === 'Butterfly Net') {
+                    setIsAnimalAppeared(false);
+                    animalImgName.current = '';
+                    count++;
+                    // Play sound:
+                    sound_glimmer.current.pause();
+                    sound_glimmer.current.currentTime = 0;
+                    sound_glimmer.current.play();
+                    break;
+                }
+            }
+        }
+        if (count === 0) {
+            showMessageBox('Bạn cần dùng công cụ bắt sâu bọ!');
+        }
+    }
+
+    useEffect(() => {
+        if (img_class === ' plant-img' && Math.floor(Math.random() * 5) === 0) {
+            setIsAnimalAppeared(true);
+            // Set animalImgName:
+            if (animalImgName.current === '') {
+                let randomAnimalIndex = Math.floor(Math.random() * 6);
+                let index = 0;
+                for (const key in animalImgs) {
+                    if (index === randomAnimalIndex) {
+                        animalImgName.current = key;
+                        break;
+                    }
+                    index++;
+                }
+            }
+        }
+        else {
+            setIsAnimalAppeared(false);
+        }
+    }, [img_class]);
+
+    const renderAnimalComponent = () => {
+        if (isAnimalAppeared === true) {
+            return (
+                <div className="animal">
+                    <img className="animal-img"
+                        src={animalImgs[animalImgName.current]} alt="animal-btn-img"
+                        onClick={(e) => { return onClick_animal(e); }}>
+                    </img>
+                </div>
+            )
+        }
+    }
+
     return (
         <div className="plant" onClick={(e) => { return onClick_ground(e); }}>
             {/* {console.log( {1: seed.beAbleToHarvest, 2: seed.currentState, 3: timer_value.current})} */}
@@ -225,6 +300,7 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
                 <img className="plant-btn-img" src={plantBtn_src} alt="plant-btn-img"></img>
             </div>
             <CountdownTimer timer_value={timer_value.current}></CountdownTimer>
+            {renderAnimalComponent()}
         </div>
     );
 }

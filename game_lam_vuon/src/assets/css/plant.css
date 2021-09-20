@@ -9,3 +9,16 @@
   bottom: 25%;
   transform: translate(-50%, 0%) rotateX(30deg);
 }
+
+.garden .garden-plots .plot .animal .animal-img {
+  width: 60px;
+  height: auto;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.garden .garden-plots .plot .animal .animal-img:hover {
+  border-radius: 50%;
+  box-shadow: 0px 0px 5px 1px #fff;
+}

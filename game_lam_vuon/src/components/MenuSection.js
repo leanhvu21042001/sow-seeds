@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { backgroundMusic, sound } from '../services/sound.service';
+import { backgroundMusic } from '../services/sound.service';
 import TabsSection from './TabsSection';
 
-function MenuSection() {
+function MenuSection({ isAudioMuted, setIsAudioMuted, sound_pop_1, onChange_SoundSlider, money }) {
     // 1.1. Background music:
     const [bgMusic] = useState(new Audio(backgroundMusic.ThePianoGuys_RachelPlatten_ThisIsYourFightSong));
 
@@ -26,19 +26,9 @@ function MenuSection() {
 
 
     // 2.1. Audio:
-    const [pop_1] = useState(new Audio(sound.pop_1));
-
-    // 2.2. Audio - Check if audio is mute:
-    const [isMutedAudio, setIsMutedAudio] = useState(false);
-
-    // 2.3. Audio - Handle events:
     const onClick_MenuBtn = () => {
         onClick_MenuOverlay();
-        pop_1.play();
-    }
-
-    const onChange_SoundSlider = ({ target }) => {
-        pop_1.volume = target.value / 100;
+        sound_pop_1.current.play();
     }
 
 
@@ -58,11 +48,11 @@ function MenuSection() {
     }, [bgMusic, isPausedBGM]);
 
     useEffect(() => {
-        if (isMutedAudio === true) {
-            pop_1.muted = true;
+        if (isAudioMuted === true) {
+            sound_pop_1.current.muted = true;
         }
         else {
-            pop_1.muted = false;
+            sound_pop_1.current.muted = false;
         }
     })
 
@@ -80,14 +70,15 @@ function MenuSection() {
                 </div>
                 <div className="menu-content">
                     <TabsSection
-                        isMutedAudio={isMutedAudio}
-                        setIsMutedAudio={setIsMutedAudio}
+                        isAudioMuted={isAudioMuted}
+                        setIsAudioMuted={setIsAudioMuted}
                         onChange_SoundSlider={onChange_SoundSlider}
                         isPausedBGM={isPausedBGM}
                         bgmVolume={bgmVolume}
                         setIsPausedBGM={setIsPausedBGM}
                         stopBGM={stopBGM}
                         setBgmVolume={setBgmVolume}
+                        money={money}
                     ></TabsSection>
                 </div>
             </div>
