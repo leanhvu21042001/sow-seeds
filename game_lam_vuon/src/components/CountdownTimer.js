@@ -15,7 +15,7 @@ function CountdownTimer({ timer_value }) {
             // Set up timer:
             let minutes = Math.floor(timer_value / 60);
             let seconds = timer_value - (minutes * 60);
-    
+
             // Run timer:
             intervalID = setInterval(function () {
                 seconds--;

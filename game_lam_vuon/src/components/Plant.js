@@ -156,7 +156,7 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
         if (seed.currentState === 'plant_lv2') {
             if (seed.beAbleToHarvest === true && count_harvesting.current < seed.numberOfHarvestTime) {
                 count_harvesting.current = count_harvesting.current + 1;
-                
+
                 if (isAnimalAppeared === true) {
                     harvestAndSellPlant(seed.price_of_plant - (0.5 * seed.price_of_plant));
                     showMessageBox(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant - (0.5 * seed.price_of_plant)}.\n(Đã bị giảm $${(0.5 * seed.price_of_plant)} do sâu bọ!)`);
@@ -165,7 +165,7 @@ function Plant({ position, bag, toolsInUse, removeLastItemFromBag, harvestAndSel
                     harvestAndSellPlant(seed.price_of_plant);
                     showMessageBox(`Đã thu hoạch! Bạn nhận được $${seed.price_of_plant}.`);
                 }
-                
+
                 // Change states after harvesting:
                 clearTimeout(timeoutID.current);
                 if (seed.numberOfHarvestTime < 3) {

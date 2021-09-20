@@ -25,6 +25,7 @@ ReactDOM.render(
             <App />
           </UserProvider>
         </Route>
+
       </Switch>
     </Router>
   </React.StrictMode>,

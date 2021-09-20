@@ -10,7 +10,7 @@ import UserContext from '../store/contexts/UserContext';
 import { sound } from '../services/sound.service';
 
 function App() {
-  const { name, imageString, money, setMoney, level } = useContext(UserContext);
+  const { name, imageString, money, setMoney, level, numberOfHavestTimes, setNumberOfHavestTimes, levelStages_ByHarvestTime } = useContext(UserContext);
   // Sounds:
   const [isAudioMuted, setIsAudioMuted] = useState(false);
   const sound_glimmer = useRef(new Audio(sound.glimmer));
@@ -198,6 +198,9 @@ function App() {
   }
 
   const harvestAndSellPlant = (price_of_plant) => {
+    setNumberOfHavestTimes((prevState) => {
+      return prevState + 1;
+    })
     setMoney(() => {
       return money + price_of_plant;
     });
@@ -226,14 +229,14 @@ function App() {
     sound_zigzag.current.volume = target.value / 100;
   }
 
-  
+
 
   // Component:
   return (
     <div className="game-section">
       <MainSection bag={bag} toolsInUse={toolsInUse} removeLastItemFromBag={removeLastItemFromBag} harvestAndSellPlant={harvestAndSellPlant} showMessageBox={showMessageBox} sound_glimmer={sound_glimmer} sound_zigzag={sound_zigzag} sound_flash={sound_flash}></MainSection>
 
-      <MenuSection isAudioMuted={isAudioMuted} setIsAudioMuted={setIsAudioMuted} sound_pop_1={sound_pop_1} onChange_SoundSlider={onChange_SoundSlider} money={money}></MenuSection>
+      <MenuSection isAudioMuted={isAudioMuted} setIsAudioMuted={setIsAudioMuted} sound_pop_1={sound_pop_1} onChange_SoundSlider={onChange_SoundSlider} money={money} numberOfHavestTimes={numberOfHavestTimes} levelStages_ByHarvestTime={levelStages_ByHarvestTime}></MenuSection>
 
       {/* Seeds: */}
       <div className="shop-section" style={{ position: 'fixed', top: 0, left: 0 }}>

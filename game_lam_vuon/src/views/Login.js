@@ -27,10 +27,10 @@ export default function Login() {
         defaultValue={name}
         onKeyDown={(e) => handleOnEnter(e)}
         onChange={(e) => setName(e.target.value)}
-        placeholder="name" className="login__name" />
+        placeholder="Enter your name" className="login__name" />
       <button
         onClick={() => { handleClickButton() }}
-        type="submit" className="login__confirm">Confirm</button>
+        type="submit" className="login__confirm">Confirm!</button>
     </div>
   )
 }

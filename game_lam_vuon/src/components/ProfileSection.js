@@ -1,8 +1,30 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import UserContext from '../store/contexts/UserContext';
 
 function ProfileSection() {
-    const { name, imageString, money, level, logout} = useContext(UserContext);
+    const { name, imageString, money, level, numberOfHavestTimes, levelStages_ByHarvestTime, logout } = useContext(UserContext);
+    const [levelFiller, setLevelFiller] = useState('0%');
+
+    useEffect(() => {
+        if (level !== 'MAX') {
+            if (level > 0) {
+                let prevNum = (levelStages_ByHarvestTime.current[level - 1]);
+                let currentNum = levelStages_ByHarvestTime.current[level];
+                let maxValue = currentNum - prevNum;
+                let currentValue = numberOfHavestTimes - prevNum;
+                console.log(((currentValue / maxValue) * 100) + '%');
+                setLevelFiller(() => {
+                    return ((currentValue / maxValue) * 100) + '%';
+                })
+            }
+            else {
+                setLevelFiller(() => {
+                    return ((numberOfHavestTimes / levelStages_ByHarvestTime.current[level]) * 100) + '%';
+                });
+            }
+        }
+    }, [level, numberOfHavestTimes, levelStages_ByHarvestTime]);
+
     return (
         <div className="profile-section">
             <div className="left-section">
@@ -13,7 +35,7 @@ function ProfileSection() {
                 <div className="user-level-wrapper">
                     <div className="user-level">
                         <div className="level-filler"
-                            style={{ width: `${level/100}%` }}
+                            style={{ width: levelFiller }}
                         >
                         </div>
                         <div className="level-text">Level {level}</div>
@@ -25,7 +47,7 @@ function ProfileSection() {
                     </div>
                 </div>
                 <a
-                    onClick={() => {logout()}}
+                    onClick={() => { logout() }}
                     className="sign-out-btn" href="/">Sign out</a>
             </div>
 

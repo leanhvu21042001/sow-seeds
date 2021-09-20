@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { backgroundMusic } from '../services/sound.service';
 import TabsSection from './TabsSection';
 
-function MenuSection({ isAudioMuted, setIsAudioMuted, sound_pop_1, onChange_SoundSlider, money }) {
+function MenuSection({ isAudioMuted, setIsAudioMuted, sound_pop_1, onChange_SoundSlider, money, numberOfHavestTimes, levelStages_ByHarvestTime }) {
     // 1.1. Background music:
     const [bgMusic] = useState(new Audio(backgroundMusic.ThePianoGuys_RachelPlatten_ThisIsYourFightSong));
 
@@ -79,6 +79,8 @@ function MenuSection({ isAudioMuted, setIsAudioMuted, sound_pop_1, onChange_Soun
                         stopBGM={stopBGM}
                         setBgmVolume={setBgmVolume}
                         money={money}
+                        numberOfHavestTimes={numberOfHavestTimes}
+                        levelStages_ByHarvestTime={levelStages_ByHarvestTime}
                     ></TabsSection>
                 </div>
             </div>
